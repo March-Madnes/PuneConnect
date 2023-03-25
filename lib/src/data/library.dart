@@ -4,28 +4,33 @@
 
 import 'author.dart';
 import 'book.dart';
+import 'package:flutter/material.dart';
 
 final libraryInstance = Library()
   ..addBook(
       title: 'Left Hand of Darkness',
       authorName: 'Ursula K. Le Guin',
       isPopular: true,
-      isNew: true)
+      isNew: true,
+    )
   ..addBook(
       title: 'Too Like the Lightning',
       authorName: 'Ada Palmer',
       isPopular: false,
-      isNew: true)
+      isNew: true,
+    )
   ..addBook(
       title: 'Kindred',
       authorName: 'Octavia E. Butler',
       isPopular: true,
-      isNew: false)
+      isNew: false,
+    )
   ..addBook(
       title: 'The Lathe of Heaven',
       authorName: 'Ursula K. Le Guin',
       isPopular: false,
-      isNew: false);
+      isNew: false,
+    );
 
 class Library {
   final List<Book> allBooks = [];
