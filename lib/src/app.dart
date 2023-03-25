@@ -29,6 +29,7 @@ class _PuneConnectState extends State<PuneConnect> {
       allowedPaths: [
         '/signin',
         '/authors',
+        '/home',
         '/settings',
         '/books/new',
         '/books/all',
@@ -89,9 +90,9 @@ class _PuneConnectState extends State<PuneConnect> {
     if (!signedIn && from != signInRoute) {
       return signInRoute;
     }
-    // Go to /books if the user is signed in and tries to go to /signin.
+    // Go to /home if the user is signed in and tries to go to /signin.
     else if (signedIn && from == signInRoute) {
-      return ParsedRoute('/books/popular', '/books/popular', {}, {});
+      return ParsedRoute('/home', '/home', {}, {});
     }
     return from;
   }

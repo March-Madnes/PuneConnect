@@ -9,6 +9,7 @@ import '../screens/settings.dart';
 import '../widgets/fade_transition_page.dart';
 import 'authors.dart';
 import 'books.dart';
+import 'home.dart';
 import 'scaffold.dart';
 
 /// Displays the contents of the body of [PuneConnectScaffold]
@@ -39,11 +40,11 @@ class PuneConnectScaffoldBody extends StatelessWidget {
             key: ValueKey('settings'),
             child: SettingsScreen(),
           )
-        else if (currentRoute.pathTemplate.startsWith('/books') ||
+        else if (currentRoute.pathTemplate.startsWith('/home') ||
             currentRoute.pathTemplate == '/')
           const FadeTransitionPage<void>(
-            key: ValueKey('books'),
-            child: BooksScreen(),
+            key: ValueKey('home'),
+            child: HomeScreen(),
           )
 
         // Avoid building a Navigator with an empty `pages` list when the

@@ -23,14 +23,14 @@ class PuneConnectScaffold extends StatelessWidget {
         selectedIndex: selectedIndex,
         body: const PuneConnectScaffoldBody(),
         onDestinationSelected: (idx) {
-          if (idx == 0) routeState.go('/books/popular');
+          if (idx == 0) routeState.go('/home');
           if (idx == 1) routeState.go('/authors');
           if (idx == 2) routeState.go('/settings');
         },
         destinations: const [
           AdaptiveScaffoldDestination(
-            title: 'Books',
-            icon: Icons.book,
+            title: 'Home',
+            icon: Icons.home,
           ),
           AdaptiveScaffoldDestination(
             title: 'Authors',
@@ -46,7 +46,7 @@ class PuneConnectScaffold extends StatelessWidget {
   }
 
   int _getSelectedIndex(String pathTemplate) {
-    if (pathTemplate.startsWith('/books')) return 0;
+    if (pathTemplate.startsWith('/home')) return 0;
     if (pathTemplate == '/authors') return 1;
     if (pathTemplate == '/settings') return 2;
     return 0;

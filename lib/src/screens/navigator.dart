@@ -59,7 +59,7 @@ class _PuneConnectNavigatorState extends State<PuneConnectNavigator> {
         // the /books or /authors tab in PuneConnectScaffold.
         if (route.settings is Page &&
             (route.settings as Page).key == _bookDetailsKey) {
-          routeState.go('/books/popular');
+          routeState.go('/home');
         }
 
         if (route.settings is Page &&
@@ -79,7 +79,7 @@ class _PuneConnectNavigatorState extends State<PuneConnectNavigator> {
                 var signedIn = await authState.signIn(
                     credentials.username, credentials.password);
                 if (signedIn) {
-                  await routeState.go('/books/popular');
+                  await routeState.go('/home');
                 }
               },
             ),
