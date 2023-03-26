@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pune_connect/src/widgets/issued_pass.dart';
+import 'package:pune_connect/src/widgets/book_list.dart';
 
 import '../data/library.dart';
 import '../routing.dart';
+import '../widgets/book_list.dart';
 import '../widgets/issued_pass.dart';
 
 // class AuthorsScreen extends StatelessWidget {
@@ -49,12 +50,12 @@ class HomeScreen extends StatelessWidget {
                         padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 16),
                         child: const Text("Hii Aakash"),
                       ),
-                      if(libraryInstance.allBooks.isNotEmpty)
+                      if(libraryInstance.allIssuedPasses.isNotEmpty)
                         Image.asset(
                           'assets/images/1.png',
                           // fit: BoxFit.cover,
                         ),
-                      if(libraryInstance.allBooks.isEmpty)
+                      if(libraryInstance.allIssuedPasses.isEmpty)
                         Column(
                           children: [
                             const Text("No Passes Issued for the day"),
@@ -76,8 +77,8 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           Flexible(
-            child: BookList(
-              books: libraryInstance.allBooks,
+            child: IssuedPassList(
+              passes: libraryInstance.allIssuedPasses,
               onTap: (book) {
                 RouteStateScope.of(context).go('/book/${book.id}');
               },

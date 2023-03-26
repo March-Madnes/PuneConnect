@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 import '../data.dart';
 import '../routing.dart';
-import '../widgets/issued_pass.dart';
+import '../widgets/book_list.dart';
 
 class BooksScreen extends StatefulWidget {
   const BooksScreen({

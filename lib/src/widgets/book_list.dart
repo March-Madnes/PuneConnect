@@ -3,30 +3,31 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+
 import '../data.dart';
 
-class IssuedPassList extends StatelessWidget {
-  final List<IssuedPass> passes;
-  final ValueChanged<IssuedPass>? onTap;
+class BookList extends StatelessWidget {
+  final List<Book> books;
+  final ValueChanged<Book>? onTap;
 
-  const IssuedPassList({
-    required this.passes,
+  const BookList({
+    required this.books,
     this.onTap,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) => ListView.builder(
-        itemCount: passes.length,
+        itemCount: books.length,
         itemBuilder: (context, index) => ListTile(
           title: Text(
-            passes[index].title,
+            books[index].title,
           ),
           subtitle: Text(
-            passes[index].issueDate.toString(),
+            books[index].author.name,
           ),
-          leading: passes[index].passIcon,
-          onTap: onTap != null ? () => onTap!(passes[index]) : null,
+          leading: const Icon(Icons.abc),
+          onTap: onTap != null ? () => onTap!(books[index]) : null,
         ),
       );
 }

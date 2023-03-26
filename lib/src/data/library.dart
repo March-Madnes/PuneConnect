@@ -1,40 +1,108 @@
 // Copyright 2021, the Flutter project authors. Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
-
 import 'author.dart';
 import 'book.dart';
+import 'issuedPass.dart';
+import 'pass.dart';
 import 'package:flutter/material.dart';
 
 final libraryInstance = Library()
-  ..addBook(
-      title: 'Left Hand of Darkness',
-      authorName: 'Ursula K. Le Guin',
-      isPopular: true,
-      isNew: true,
+  ..addPass(
+      passIndex: 0, 
+      id: 569357, 
+      issueDate: DateTime(2023, 10, 13)
     )
-  ..addBook(
-      title: 'Too Like the Lightning',
-      authorName: 'Ada Palmer',
-      isPopular: false,
-      isNew: true,
+  ..addPass(
+      passIndex: 2, 
+      id: 685357, 
+      issueDate: DateTime(2023, 10, 13)
     )
-  ..addBook(
-      title: 'Kindred',
-      authorName: 'Octavia E. Butler',
-      isPopular: true,
-      isNew: false,
+  ..addPass(
+      passIndex: 1, 
+      id: 789967, 
+      issueDate: DateTime(2023, 10, 13)
     )
-  ..addBook(
-      title: 'The Lathe of Heaven',
-      authorName: 'Ursula K. Le Guin',
-      isPopular: false,
-      isNew: false,
+  ..addPass(
+      passIndex: 3, 
+      id: 899357, 
+      issueDate: DateTime(2023, 10, 13)
+    )
+  ..addPass(
+      passIndex: 0, 
+      id: 932357, 
+      issueDate: DateTime(2023, 10, 13)
+    )
+  ..addPass(
+      passIndex: 1, 
+      id: 498357, 
+      issueDate: DateTime(2023, 10, 13)
     );
+  // ..addBook(
+  //     title: 'Left Hand of Darkness',
+  //     authorName: 'Ursula K. Le Guin',
+  //     isPopular: true,
+  //     isNew: true,
+  //   )
+  // ..addBook(
+  //     title: 'Too Like the Lightning',
+  //     authorName: 'Ada Palmer',
+  //     isPopular: false,
+  //     isNew: true,
+  //   )
+  // ..addBook(
+  //     title: 'Kindred',
+  //     authorName: 'Octavia E. Butler',
+  //     isPopular: true,
+  //     isNew: false,
+  //   )
+  // ..addBook(
+  //     title: 'The Lathe of Heaven',
+  //     authorName: 'Ursula K. Le Guin',
+  //     isPopular: false,
+  //     isNew: false,
+  //   );
 
 class Library {
   final List<Book> allBooks = [];
   final List<Author> allAuthors = [];
+  final List<IssuedPass> allIssuedPasses = [];
+  final List<Pass> allPasses = [
+    Pass(
+      0, 
+      'Daily Pass', 
+      50, 
+      const Icon(Icons.abc_outlined)
+    ),
+    Pass(
+      1, 
+      'Women Pass', 
+      40, 
+      const Icon(Icons.girl)
+    ),
+    Pass(
+      2, 
+      'Student Pass', 
+      25, 
+      const Icon(Icons.person_2)
+    ),
+    Pass(
+      1, 
+      'Senior Citizen Pass', 
+      40, 
+      const Icon(Icons.person_3)
+    )
+
+  ];
+
+  void addPass({
+    required int passIndex,
+    required int id,
+    required DateTime issueDate,
+  }) {
+    var issuedPass = IssuedPass(id, passIndex, allPasses[passIndex].title, issueDate, allPasses[passIndex].price, allPasses[passIndex].passIcon);
+    allIssuedPasses.add(issuedPass);
+  }
 
   void addBook({
     required String title,
