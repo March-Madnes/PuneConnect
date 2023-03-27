@@ -30,62 +30,61 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: Column(
-        children: [
-          Flexible(
-            child: Center(
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      // ignore: prefer_const_constructors
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 16),
-                        child: const Text("Hii Aakash"),
-                      ),
-                      if(libraryInstance.allIssuedPasses.isNotEmpty)
-                        Image.asset(
-                          'assets/images/1.png',
-                          // fit: BoxFit.cover,
+        appBar: AppBar(
+          title: Text(title),
+        ),
+        body: Column(
+          children: [
+            Flexible(
+              child: Center(
+                child: Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // ignore: prefer_const_constructors
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 16),
+                          child: const Text("Hii Aakash"),
                         ),
-                      if(libraryInstance.allIssuedPasses.isEmpty)
-                        Column(
-                          children: [
-                            const Text("No Passes Issued for the day"),
-                            Padding(
-                              padding: const EdgeInsets.all(20),
-                              child: FilledButton(
-                                    onPressed: () {
-                                      RouteStateScope.of(context).go('/book');
-                                    },
-                                    child: const Text("Issue Pass"),
+                        if (libraryInstance.allIssuedPasses.isNotEmpty)
+                          Image.asset(
+                            'assets/images/1.png',
+                            // fit: BoxFit.cover,
+                          ),
+                        if (libraryInstance.allIssuedPasses.isEmpty)
+                          Column(
+                            children: [
+                              const Text("No Passes Issued for the day"),
+                              Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: FilledButton(
+                                  onPressed: () {
+                                    RouteStateScope.of(context).go('/book');
+                                  },
+                                  child: const Text("Issue Pass"),
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                    ],
+                            ],
+                          ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          Flexible(
-            child: IssuedPassList(
-              passes: libraryInstance.allIssuedPasses,
-              onTap: (book) {
-                RouteStateScope.of(context).go('/book/${book.id}');
-              },
+            Flexible(
+              child: IssuedPassList(
+                passes: libraryInstance.allIssuedPasses,
+                onTap: (book) {
+                  RouteStateScope.of(context).go('/book/${book.id}');
+                },
+              ),
             ),
-          ),
-        ],
-      )
-  );  
+          ],
+        ));
   }
 }
