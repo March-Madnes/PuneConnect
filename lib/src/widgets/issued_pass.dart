@@ -16,17 +16,26 @@ class IssuedPassList extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => ListView.builder(
-        itemCount: passes.length,
-        itemBuilder: (context, index) => ListTile(
-          title: Text(
-            passes[index].title,
-          ),
-          subtitle: Text(
-            passes[index].issueDate.toString(),
-          ),
-          leading: passes[index].passIcon,
-          onTap: onTap != null ? () => onTap!(passes[index]) : null,
-        ),
-      );
+  Widget build(BuildContext context) => Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      Flexible(
+        child: ListView.builder(
+                itemCount: passes.length,
+                itemBuilder: (context, index) => ListTile(
+                  title: Text(
+                    style: const TextStyle(fontSize: 24.0),
+                    passes[index].title,
+                  ),
+                  subtitle: Text(
+                    passes[index].issueDate.toString(),
+                  ),
+                  leading: passes[index].passIcon,
+                  onTap: onTap != null ? () => onTap!(passes[index]) : null,
+                ),
+              ),
+      ),
+    ],
+  );
 }
