@@ -47,7 +47,7 @@ class Library {
     Pass(0, 'Daily Pass', 50, const Icon(Icons.abc_outlined)),
     Pass(1, 'Women Pass', 40, const Icon(Icons.girl)),
     Pass(2, 'Student Pass', 25, const Icon(Icons.person_2)),
-    Pass(1, 'Senior Citizen Pass', 40, const Icon(Icons.person_3))
+    Pass(3, 'Senior Citizen Pass', 40, const Icon(Icons.person_3))
   ];
 
   void addPass({

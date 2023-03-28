@@ -21,6 +21,7 @@ dependencies:
       url: https://github.com/google/flutter-desktop-embedding.git
       path: plugins/window_size
   flutter_lints: ^2.0.1
+  mobile_scanner: ^1.0.0
 
 dev_dependencies:
   # analysis_defaults:

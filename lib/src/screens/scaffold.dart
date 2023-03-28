@@ -33,12 +33,12 @@ class PuneConnectScaffold extends StatelessWidget {
             icon: Icons.home,
           ),
           AdaptiveScaffoldDestination(
-            title: 'Authors',
-            icon: Icons.person,
+            title: 'Book Pass',
+            icon: Icons.add_box,
           ),
           AdaptiveScaffoldDestination(
             title: 'Settings',
-            icon: Icons.settings,
+            icon: Icons.admin_panel_settings,
           ),
         ],
       ),

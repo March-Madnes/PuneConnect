@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import '../routing.dart';
 import '../screens/settings.dart';
 import '../widgets/fade_transition_page.dart';
-import 'authors.dart';
-import 'books.dart';
+import 'book_pass.dart';
+import 'admin.dart';
 import 'home.dart';
 import 'scaffold.dart';
 
@@ -33,12 +33,12 @@ class PuneConnectScaffoldBody extends StatelessWidget {
         if (currentRoute.pathTemplate.startsWith('/authors'))
           const FadeTransitionPage<void>(
             key: ValueKey('authors'),
-            child: AuthorsScreen(),
+            child: BookPassScreen(),
           )
         else if (currentRoute.pathTemplate.startsWith('/settings'))
           const FadeTransitionPage<void>(
             key: ValueKey('settings'),
-            child: SettingsScreen(),
+            child: AdminScreen(),
           )
         else if (currentRoute.pathTemplate.startsWith('/home') ||
             currentRoute.pathTemplate == '/')
