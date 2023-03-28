@@ -35,6 +35,8 @@ class _PuneConnectState extends State<PuneConnect> {
         '/books/all',
         '/books/popular',
         '/book/:bookId',
+        '/pass/:passId',
+        '/issuedPass/:issuedPassId'
         '/author/:authorId',
       ],
       guard: _guard,
@@ -65,7 +67,7 @@ class _PuneConnectState extends State<PuneConnect> {
           child: MaterialApp.router(
             routerDelegate: _routerDelegate,
             routeInformationParser: _routeParser,
-            // Revert back to pre-Flutter-2.5 transition behavior:
+            // Revert back to pre-Flutter-2.5 transition behaior:
             // https://github.com/flutter/flutter/issues/82053
             theme: ThemeData(
               pageTransitionsTheme: const PageTransitionsTheme(

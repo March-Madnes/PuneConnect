@@ -12,6 +12,7 @@ import '../screens/sign_in.dart';
 import '../widgets/fade_transition_page.dart';
 import 'author_details.dart';
 import 'book_details.dart';
+import 'pass_details.dart';
 import 'scaffold.dart';
 
 /// Builds the top-level navigator for the app. The pages to display are based
@@ -33,6 +34,7 @@ class _PuneConnectNavigatorState extends State<PuneConnectNavigator> {
   final _scaffoldKey = const ValueKey('App scaffold');
   final _bookDetailsKey = const ValueKey('Book details screen');
   final _authorDetailsKey = const ValueKey('Author details screen');
+  final _passDetailsKey = const ValueKey('Pass details screen');
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +54,12 @@ class _PuneConnectNavigatorState extends State<PuneConnectNavigator> {
           (b) => b.id.toString() == routeState.route.parameters['authorId']);
     }
 
+    Pass? selectedPass;
+    if (pathTemplate == '/pass/:passId') {
+      selectedPass = libraryInstance.allPasses.firstWhereOrNull(
+          (b) => b.passIndex.toString() == routeState.route.parameters['passId']);
+    }
+
     return Navigator(
       key: widget.navigatorKey,
       onPopPage: (route, dynamic result) {
@@ -65,6 +73,11 @@ class _PuneConnectNavigatorState extends State<PuneConnectNavigator> {
         if (route.settings is Page &&
             (route.settings as Page).key == _authorDetailsKey) {
           routeState.go('/authors');
+        }
+
+        if (route.settings is Page &&
+            (route.settings as Page).key == _passDetailsKey) {
+          routeState.go('/home');
         }
 
         return route.didPop(result);
@@ -104,6 +117,13 @@ class _PuneConnectNavigatorState extends State<PuneConnectNavigator> {
               key: _authorDetailsKey,
               child: AuthorDetailsScreen(
                 author: selectedAuthor,
+              ),
+            )
+          else if (selectedPass != null)
+            MaterialPage<void>(
+              key: _passDetailsKey,
+              child: PassDetailsScreen(
+                pass: selectedPass,
               ),
             ),
         ],

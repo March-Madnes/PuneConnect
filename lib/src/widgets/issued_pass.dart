@@ -3,6 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:pune_connect/src/screens/issued_pass_details.dart';
 import '../data.dart';
 
 class IssuedPassList extends StatelessWidget {
@@ -32,7 +33,13 @@ class IssuedPassList extends StatelessWidget {
                     passes[index].issueDate.toString(),
                   ),
                   leading: passes[index].passIcon,
-                  onTap: onTap != null ? () => onTap!(passes[index]) : null,
+                  trailing: Text(passes[index].id.toString()),
+                  onTap: () =>  Navigator.push(context, MaterialPageRoute<void>(
+                    builder: (context) {
+                      return IssuedPassDetailsScreen(
+                        pass: passes[index],);
+                    },
+                  ))
                 ),
               ),
       ),

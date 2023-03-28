@@ -8,36 +8,36 @@ import 'pass.dart';
 import 'package:flutter/material.dart';
 
 final libraryInstance = Library()
-  ..addPass(passIndex: 0, id: 569357, issueDate: DateTime(2023, 10, 13))
-  ..addPass(passIndex: 2, id: 685357, issueDate: DateTime(2023, 10, 13))
-  ..addPass(passIndex: 1, id: 789967, issueDate: DateTime(2023, 10, 13))
-  ..addPass(passIndex: 3, id: 899357, issueDate: DateTime(2023, 10, 13))
-  ..addPass(passIndex: 0, id: 932357, issueDate: DateTime(2023, 10, 13))
-  ..addPass(passIndex: 1, id: 498357, issueDate: DateTime(2023, 10, 13));
-// ..addBook(
-//     title: 'Left Hand of Darkness',
-//     authorName: 'Ursula K. Le Guin',
-//     isPopular: true,
-//     isNew: true,
-//   )
-// ..addBook(
-//     title: 'Too Like the Lightning',
-//     authorName: 'Ada Palmer',
-//     isPopular: false,
-//     isNew: true,
-//   )
-// ..addBook(
-//     title: 'Kindred',
-//     authorName: 'Octavia E. Butler',
-//     isPopular: true,
-//     isNew: false,
-//   )
-// ..addBook(
-//     title: 'The Lathe of Heaven',
-//     authorName: 'Ursula K. Le Guin',
-//     isPopular: false,
-//     isNew: false,
-//   );
+  ..addPass(passIndex: 0, issueDate: DateTime(2023, 10, 13))
+  ..addPass(passIndex: 2, issueDate: DateTime(2023, 10, 13))
+  ..addPass(passIndex: 1, issueDate: DateTime(2023, 10, 13))
+  ..addPass(passIndex: 3, issueDate: DateTime(2023, 10, 13))
+  ..addPass(passIndex: 0, issueDate: DateTime(2023, 10, 13))
+  ..addPass(passIndex: 1, issueDate: DateTime(2023, 10, 13))
+  ..addBook(
+      title: 'Left Hand of Darkness',
+      authorName: 'Ursula K. Le Guin',
+      isPopular: true,
+      isNew: true,
+    )
+  ..addBook(
+      title: 'Too Like the Lightning',
+      authorName: 'Ada Palmer',
+      isPopular: false,
+      isNew: true,
+    )
+  ..addBook(
+      title: 'Kindred',
+      authorName: 'Octavia E. Butler',
+      isPopular: true,
+      isNew: false,
+    )
+  ..addBook(
+      title: 'The Lathe of Heaven',
+      authorName: 'Ursula K. Le Guin',
+      isPopular: false,
+      isNew: false,
+    );
 
 class Library {
   final List<Book> allBooks = [];
@@ -52,10 +52,9 @@ class Library {
 
   void addPass({
     required int passIndex,
-    required int id,
     required DateTime issueDate,
   }) {
-    var issuedPass = IssuedPass(id, passIndex, allPasses[passIndex].title,
+    var issuedPass = IssuedPass(allIssuedPasses.length, passIndex, allPasses[passIndex].title,
         issueDate, allPasses[passIndex].price, allPasses[passIndex].passIcon);
     allIssuedPasses.add(issuedPass);
   }

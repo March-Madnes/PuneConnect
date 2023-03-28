@@ -79,8 +79,8 @@ class HomeScreen extends StatelessWidget {
             Flexible(
               child: IssuedPassList(
                 passes: libraryInstance.allIssuedPasses,
-                onTap: (book) {
-                  RouteStateScope.of(context).go('/book/${book.id}');
+                onTap: (issuedPass) {
+                  print("Hello");
                 },
               ),
             ),
