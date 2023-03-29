@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:nfc_manager/nfc_manager.dart';
+import 'package:permission_handler/permission_handler.dart';
 // import 'package:nfc_in_flutter/nfc_in_flutter.dart';
 
 import 'dart:convert';
@@ -17,41 +18,82 @@ class _AdminScreenState extends State<AdminScreen> {
   MobileScannerController cameraController = MobileScannerController();
   bool _screenOpened = false;
   String _nfcData = '';
+  bool _isAvailable = false;
+
+  Future<PermissionStatus> _getCameraPermission() async {
+    var status = await Permission.camera.status;
+    if (!status.isGranted) {
+        final result = await Permission.camera.request();
+        return result;
+    } else {
+      return status;
+    }
+  }
+
+  // Future<Set<bool>> isAvailable()  async  =>{
+  //   await NfcManager.instance.isAvailable()
+  // };
 
   Future<void> _processNfcData() => showDialog<String>(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Alert!'),
-          content: Text('NFC Message: ${result.value}'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context, 'Cancel'),
-              child: const Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () => Navigator.pop(context, 'OK'),
-              child: const Text('OK'),
-            ),
-          ],
+    context: context,
+    builder: (context) => AlertDialog(
+      title: const Text('Alert!'),
+      content: Text('NFC Message: ${result.value}'),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context, 'Cancel'),
+          child: const Text('Cancel'),
         ),
-      );
+        TextButton(
+          onPressed: () => Navigator.pop(context, 'OK'),
+          child: const Text('OK'),
+        ),
+      ],
+    ),
+  );
+  Future<void> _NfcNotAvailable() => showDialog<String>(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: const Text('Alert!'),
+      content: Text('NFC not available'),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context, 'Cancel'),
+          child: const Text('Cancel'),
+        ),
+        TextButton(
+          onPressed: () => Navigator.pop(context, 'OK'),
+          child: const Text('OK'),
+        ),
+      ],
+    ),
+  );
+
+  void checkNfc() async{    
+    _isAvailable = await NfcManager.instance.isAvailable();
+
+    if(_isAvailable){
+      await NfcManager.instance.startSession(onDiscovered: (tag) async {
+        result.value = tag.data;
+        // NfcManager.instance.stopSession();
+        await _processNfcData();
+      });
+    }
+    else{
+      await _NfcNotAvailable();
+    }
+  }
 
   @override
-  void initState() {
+  void initState(){
     super.initState();
-
+    checkNfc();
     // NFC.readNDEF().listen((NDEFMessage message) {
     //   setState(() {
     //     _nfcData = message.records.first.payload;
     //   });
     //   _processNfcData();
     // });
-
-    NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
-      result.value = tag.data;
-      // NfcManager.instance.stopSession();
-      await _processNfcData();
-    });
   }
 
   @override

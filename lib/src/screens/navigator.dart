@@ -41,7 +41,7 @@ class _PuneConnectNavigatorState extends State<PuneConnectNavigator> {
   Widget build(BuildContext context) {
     final routeState = RouteStateScope.of(context);
     // final authState = PuneConnectAuthScope.of(context);
-    final pathTemplate = routeState.route.pathTemplate;
+    // final pathTemplate = routeState.route.pathTemplate;
 
     // Book? selectedBook;
     // if (pathTemplate == '/book/:bookId') {
@@ -55,32 +55,32 @@ class _PuneConnectNavigatorState extends State<PuneConnectNavigator> {
     //       (b) => b.id.toString() == routeState.route.parameters['authorId']);
     // }
 
-    Pass? selectedPass;
-    if (pathTemplate == '/pass/:passId') {
-      selectedPass = libraryInstance.allPasses.firstWhereOrNull(
-          (b) => b.passIndex.toString() == routeState.route.parameters['passId']);
-    }
+    // Pass? selectedPass;
+    // if (pathTemplate == '/pass/:passId') {
+    //   selectedPass = libraryInstance.allPasses.firstWhereOrNull(
+    //       (b) => b.passIndex.toString() == routeState.route.parameters['passId']);
+    // }
 
     return Navigator(
       key: widget.navigatorKey,
       onPopPage: (route, dynamic result) {
         // When a page that is stacked on top of the scaffold is popped, display
         // the /books or /authors tab in PuneConnectScaffold.
-        if (route.settings is Page &&
-            (route.settings as Page).key == _bookDetailsKey) {
-          routeState.go('/home');
-        }
+        // if (route.settings is Page &&
+        //     (route.settings as Page).key == _bookDetailsKey) {
+        //   routeState.go('/home');
+        // }
 
-        if (route.settings is Page &&
-            (route.settings as Page).key == _authorDetailsKey) {
-          routeState.go('/authors');
-        }
+        // if (route.settings is Page &&
+        //     (route.settings as Page).key == _authorDetailsKey) {
+        //   routeState.go('/authors');
+        // }
 
-        if (route.settings is Page &&
-            (route.settings as Page).key == _passDetailsKey) {
-          routeState.go('/home');
-        }
-
+        // if (route.settings is Page &&
+        //     (route.settings as Page).key == _passDetailsKey) {
+        //   routeState.go('/home');
+        // }
+        routeState.go('/home');
         return route.didPop(result);
       },
       pages: [
@@ -116,13 +116,13 @@ class _PuneConnectNavigatorState extends State<PuneConnectNavigator> {
           //       author: selectedAuthor,
           //     ),
           //   )
-          if (selectedPass != null)
-            MaterialPage<void>(
-              key: _passDetailsKey,
-              child: PassDetailsScreen(
-                pass: selectedPass,
-              ),
-            ),
+          // if (selectedPass != null)
+          //   MaterialPage<void>(
+          //     key: _passDetailsKey,
+          //     child: PassDetailsScreen(
+          //       pass: selectedPass,
+          //     ),
+          //   ),
         ],
       ],
     );

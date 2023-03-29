@@ -30,6 +30,7 @@ dependencies:
   fluttertoast: ^8.2.1
   # nfc_in_flutter: ^2.0.3
   http: ^0.13.3
+  permission_handler: ^10.2.0
 
 dev_dependencies:
   # analysis_defaults:

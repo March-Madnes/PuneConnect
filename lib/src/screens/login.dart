@@ -41,8 +41,7 @@ class _LoginScreenState extends State<LoginScreen>
     auth
     .authStateChanges()
     .listen((User? user) {
-      if (user == null) {
-      } else {
+      if (user != null) {
         routeState.go('/home');
       }
     });

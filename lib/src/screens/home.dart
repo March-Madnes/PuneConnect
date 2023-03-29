@@ -51,9 +51,12 @@ class HomeScreen extends StatelessWidget {
                           child: const Text("Hii Aakash"),
                         ),
                         if (libraryInstance.allIssuedPasses.isNotEmpty)
-                          Image.asset(
-                            'assets/images/1.png',
-                            // fit: BoxFit.cover,
+                          Container(
+                            height: 200,
+                            child: Image.asset(
+                              'assets/images/1.png',
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         if (libraryInstance.allIssuedPasses.isEmpty)
                           Column(
