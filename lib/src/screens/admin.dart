@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:mobile_scanner/mobile_scanner.dart';
-import 'package:nfc_manager/nfc_manager.dart';
+// import 'package:nfc_manager/nfc_manager.dart';
+import 'package:nfc_in_flutter/nfc_in_flutter.dart';
 
+import 'dart:convert';
 class AdminScreen extends StatefulWidget {
   const AdminScreen({Key? key}) : super(key: key);
 
@@ -13,6 +16,37 @@ class _AdminScreenState extends State<AdminScreen> {
   ValueNotifier<dynamic> result = ValueNotifier(null);
   MobileScannerController cameraController = MobileScannerController();
   bool _screenOpened = false;
+  String _nfcData = '';
+
+  Future<void> _processNfcData() => showDialog<String>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Alert!'),
+          content: Text('NFC Message: $_nfcData'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'Cancel'),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'OK'),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+
+  @override
+  void initState() {
+    super.initState();
+
+    NFC.readNDEF().listen((NDEFMessage message) {
+      setState(() {
+        _nfcData = message.records.first.payload;
+      });
+      _processNfcData();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,36 +88,20 @@ class _AdminScreenState extends State<AdminScreen> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          Row(
-            children: [
-              ElevatedButton(
-                child: Text('Read NFC Chip'), onPressed: _tagRead
-              ),
-              ValueListenableBuilder<dynamic>(
-                valueListenable: result,
-                builder: (context, value, _) =>
-                    Text('${value ?? ''}'),
-              ),
-            ],
-          ),
-          MobileScanner(
+      body: MobileScanner(
             allowDuplicates: true,
             controller: cameraController,
             onDetect: _foundBarcode,
           ),
-        ],
-      ),
     );
   }
   //nfc reader function
-  void _tagRead() {
-    NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
+  // void _tagRead() {
+  //   NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
 
-      result.value = tag.data;
-      await NfcManager.instance.stopSession();
-      _foundBarcode;
+  //     result.value = tag.data;
+  //     await NfcManager.instance.stopSession();
+  //     _foundBarcode;
 
       // showDialog<String>(
       //         context: context,
@@ -102,8 +120,8 @@ class _AdminScreenState extends State<AdminScreen> {
       //           ],
       //         ),
       //       );
-    });
-  }
+  //   });
+  // }
 
   void _foundBarcode(Barcode barcode, MobileScannerArguments? args) {
     /// open screen
