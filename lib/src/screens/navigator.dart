@@ -4,8 +4,9 @@
 
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:pune_connect/src/screens/login.dart';
 
-import '../auth.dart';
+// import '../auth.dart';
 import '../data.dart';
 import '../routing.dart';
 import '../screens/sign_in.dart';
@@ -30,7 +31,7 @@ class PuneConnectNavigator extends StatefulWidget {
 }
 
 class _PuneConnectNavigatorState extends State<PuneConnectNavigator> {
-  final _signInKey = const ValueKey('Sign in');
+  // final _signInKey = const ValueKey('Sign in');
   final _scaffoldKey = const ValueKey('App scaffold');
   final _bookDetailsKey = const ValueKey('Book details screen');
   final _authorDetailsKey = const ValueKey('Author details screen');
@@ -39,7 +40,7 @@ class _PuneConnectNavigatorState extends State<PuneConnectNavigator> {
   @override
   Widget build(BuildContext context) {
     final routeState = RouteStateScope.of(context);
-    final authState = PuneConnectAuthScope.of(context);
+    // final authState = PuneConnectAuthScope.of(context);
     final pathTemplate = routeState.route.pathTemplate;
 
     // Book? selectedBook;
@@ -84,19 +85,15 @@ class _PuneConnectNavigatorState extends State<PuneConnectNavigator> {
       },
       pages: [
         if (routeState.route.pathTemplate == '/signin')
-          // Display the sign in screen.
           FadeTransitionPage<void>(
-            key: _signInKey,
-            child: SignInScreen(
-              onSignIn: (credentials) async {
-                var signedIn = await authState.signIn(
-                    credentials.username, credentials.password);
-                if (signedIn) {
-                  await routeState.go('/home');
-                }
-              },
-            ),
-          )
+            key: _scaffoldKey,
+            child: const SignupScreen(),
+        )
+        else if (routeState.route.pathTemplate == '/login')
+          FadeTransitionPage<void>(
+            key: _scaffoldKey,
+            child: const LoginScreen(),
+        )
         else ...[
           // Display the app
           FadeTransitionPage<void>(
