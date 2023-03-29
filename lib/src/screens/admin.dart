@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:nfc_manager/nfc_manager.dart';
 
 class AdminScreen extends StatefulWidget {
   const AdminScreen({Key? key}) : super(key: key);
@@ -9,6 +10,7 @@ class AdminScreen extends StatefulWidget {
 }
 
 class _AdminScreenState extends State<AdminScreen> {
+  ValueNotifier<dynamic> result = ValueNotifier(null);
   MobileScannerController cameraController = MobileScannerController();
   bool _screenOpened = false;
 
@@ -52,12 +54,55 @@ class _AdminScreenState extends State<AdminScreen> {
           ),
         ],
       ),
-      body: MobileScanner(
-        allowDuplicates: true,
-        controller: cameraController,
-        onDetect: _foundBarcode,
+      body: Column(
+        children: [
+          Row(
+            children: [
+              ElevatedButton(
+                child: Text('Read NFC Chip'), onPressed: _tagRead
+              ),
+              ValueListenableBuilder<dynamic>(
+                valueListenable: result,
+                builder: (context, value, _) =>
+                    Text('${value ?? ''}'),
+              ),
+            ],
+          ),
+          MobileScanner(
+            allowDuplicates: true,
+            controller: cameraController,
+            onDetect: _foundBarcode,
+          ),
+        ],
       ),
     );
+  }
+  //nfc reader function
+  void _tagRead() {
+    NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
+
+      result.value = tag.data;
+      await NfcManager.instance.stopSession();
+      _foundBarcode;
+
+      // showDialog<String>(
+      //         context: context,
+      //         builder: (context) => AlertDialog(
+      //           title: const Text('Alert!'),
+      //           content: const Text('The alert description goes here.'),
+      //           actions: [
+      //             TextButton(
+      //               onPressed: () => Navigator.pop(context, 'Cancel'),
+      //               child: const Text('Cancel'),
+      //             ),
+      //             TextButton(
+      //               onPressed: () => Navigator.pop(context, 'OK'),
+      //               child: const Text('OK'),
+      //             ),
+      //           ],
+      //         ),
+      //       );
+    });
   }
 
   void _foundBarcode(Barcode barcode, MobileScannerArguments? args) {

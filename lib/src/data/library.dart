@@ -13,35 +13,35 @@ final libraryInstance = Library()
   ..addPass(passIndex: 1, issueDate: DateTime(2023, 10, 13))
   ..addPass(passIndex: 3, issueDate: DateTime(2023, 10, 13))
   ..addPass(passIndex: 0, issueDate: DateTime(2023, 10, 13))
-  ..addPass(passIndex: 1, issueDate: DateTime(2023, 10, 13))
-  ..addBook(
-      title: 'Left Hand of Darkness',
-      authorName: 'Ursula K. Le Guin',
-      isPopular: true,
-      isNew: true,
-    )
-  ..addBook(
-      title: 'Too Like the Lightning',
-      authorName: 'Ada Palmer',
-      isPopular: false,
-      isNew: true,
-    )
-  ..addBook(
-      title: 'Kindred',
-      authorName: 'Octavia E. Butler',
-      isPopular: true,
-      isNew: false,
-    )
-  ..addBook(
-      title: 'The Lathe of Heaven',
-      authorName: 'Ursula K. Le Guin',
-      isPopular: false,
-      isNew: false,
-    );
+  ..addPass(passIndex: 1, issueDate: DateTime(2023, 10, 13));
+  // ..addBook(
+  //     title: 'Left Hand of Darkness',
+  //     authorName: 'Ursula K. Le Guin',
+  //     isPopular: true,
+  //     isNew: true,
+  //   )
+  // ..addBook(
+  //     title: 'Too Like the Lightning',
+  //     authorName: 'Ada Palmer',
+  //     isPopular: false,
+  //     isNew: true,
+  //   )
+  // ..addBook(
+  //     title: 'Kindred',
+  //     authorName: 'Octavia E. Butler',
+  //     isPopular: true,
+  //     isNew: false,
+  //   )
+  // ..addBook(
+  //     title: 'The Lathe of Heaven',
+  //     authorName: 'Ursula K. Le Guin',
+  //     isPopular: false,
+  //     isNew: false,
+  //   );
 
 class Library {
-  final List<Book> allBooks = [];
-  final List<Author> allAuthors = [];
+  // final List<Book> allBooks = [];
+  // final List<Author> allAuthors = [];
   final List<IssuedPass> allIssuedPasses = [];
   final List<Pass> allPasses = [
     Pass(0, 'Daily Pass', 50, const Icon(Icons.abc_outlined)),
@@ -59,31 +59,31 @@ class Library {
     allIssuedPasses.add(issuedPass);
   }
 
-  void addBook({
-    required String title,
-    required String authorName,
-    required bool isPopular,
-    required bool isNew,
-  }) {
-    var author = allAuthors.firstWhere(
-      (author) => author.name == authorName,
-      orElse: () {
-        final value = Author(allAuthors.length, authorName);
-        allAuthors.add(value);
-        return value;
-      },
-    );
-    var book = Book(allBooks.length, title, isPopular, isNew, author);
+//   void addBook({
+//     required String title,
+//     required String authorName,
+//     required bool isPopular,
+//     required bool isNew,
+//   }) {
+//     var author = allAuthors.firstWhere(
+//       (author) => author.name == authorName,
+//       orElse: () {
+//         final value = Author(allAuthors.length, authorName);
+//         allAuthors.add(value);
+//         return value;
+//       },
+//     );
+//     var book = Book(allBooks.length, title, isPopular, isNew, author);
 
-    author.books.add(book);
-    allBooks.add(book);
-  }
+//     author.books.add(book);
+//     allBooks.add(book);
+//   }
 
-  List<Book> get popularBooks => [
-        ...allBooks.where((book) => book.isPopular),
-      ];
+//   List<Book> get popularBooks => [
+//         ...allBooks.where((book) => book.isPopular),
+//       ];
 
-  List<Book> get newBooks => [
-        ...allBooks.where((book) => book.isNew),
-      ];
+//   List<Book> get newBooks => [
+//         ...allBooks.where((book) => book.isNew),
+//       ];
 }

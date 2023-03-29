@@ -42,17 +42,17 @@ class _PuneConnectNavigatorState extends State<PuneConnectNavigator> {
     final authState = PuneConnectAuthScope.of(context);
     final pathTemplate = routeState.route.pathTemplate;
 
-    Book? selectedBook;
-    if (pathTemplate == '/book/:bookId') {
-      selectedBook = libraryInstance.allBooks.firstWhereOrNull(
-          (b) => b.id.toString() == routeState.route.parameters['bookId']);
-    }
+    // Book? selectedBook;
+    // if (pathTemplate == '/book/:bookId') {
+    //   selectedBook = libraryInstance.allBooks.firstWhereOrNull(
+    //       (b) => b.id.toString() == routeState.route.parameters['bookId']);
+    // }
 
-    Author? selectedAuthor;
-    if (pathTemplate == '/author/:authorId') {
-      selectedAuthor = libraryInstance.allAuthors.firstWhereOrNull(
-          (b) => b.id.toString() == routeState.route.parameters['authorId']);
-    }
+    // Author? selectedAuthor;
+    // if (pathTemplate == '/author/:authorId') {
+    //   selectedAuthor = libraryInstance.allAuthors.firstWhereOrNull(
+    //       (b) => b.id.toString() == routeState.route.parameters['authorId']);
+    // }
 
     Pass? selectedPass;
     if (pathTemplate == '/pass/:passId') {
@@ -105,21 +105,21 @@ class _PuneConnectNavigatorState extends State<PuneConnectNavigator> {
           ),
           // Add an additional page to the stack if the user is viewing a book
           // or an author
-          if (selectedBook != null)
-            MaterialPage<void>(
-              key: _bookDetailsKey,
-              child: BookDetailsScreen(
-                book: selectedBook,
-              ),
-            )
-          else if (selectedAuthor != null)
-            MaterialPage<void>(
-              key: _authorDetailsKey,
-              child: AuthorDetailsScreen(
-                author: selectedAuthor,
-              ),
-            )
-          else if (selectedPass != null)
+          // if (selectedBook != null)
+          //   MaterialPage<void>(
+          //     key: _bookDetailsKey,
+          //     child: BookDetailsScreen(
+          //       book: selectedBook,
+          //     ),
+          //   )
+          // else if (selectedAuthor != null)
+          //   MaterialPage<void>(
+          //     key: _authorDetailsKey,
+          //     child: AuthorDetailsScreen(
+          //       author: selectedAuthor,
+          //     ),
+          //   )
+          if (selectedPass != null)
             MaterialPage<void>(
               key: _passDetailsKey,
               child: PassDetailsScreen(
