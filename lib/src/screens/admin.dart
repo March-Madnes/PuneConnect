@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:mobile_scanner/mobile_scanner.dart';
-// import 'package:nfc_manager/nfc_manager.dart';
-import 'package:nfc_in_flutter/nfc_in_flutter.dart';
+import 'package:nfc_manager/nfc_manager.dart';
+// import 'package:nfc_in_flutter/nfc_in_flutter.dart';
 
 import 'dart:convert';
 class AdminScreen extends StatefulWidget {
@@ -22,7 +22,7 @@ class _AdminScreenState extends State<AdminScreen> {
         context: context,
         builder: (context) => AlertDialog(
           title: const Text('Alert!'),
-          content: Text('NFC Message: $_nfcData'),
+          content: Text('NFC Message: ${result.value}'),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context, 'Cancel'),
@@ -40,11 +40,17 @@ class _AdminScreenState extends State<AdminScreen> {
   void initState() {
     super.initState();
 
-    NFC.readNDEF().listen((NDEFMessage message) {
-      setState(() {
-        _nfcData = message.records.first.payload;
-      });
-      _processNfcData();
+    // NFC.readNDEF().listen((NDEFMessage message) {
+    //   setState(() {
+    //     _nfcData = message.records.first.payload;
+    //   });
+    //   _processNfcData();
+    // });
+
+    NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
+      result.value = tag.data;
+      // NfcManager.instance.stopSession();
+      await _processNfcData();
     });
   }
 

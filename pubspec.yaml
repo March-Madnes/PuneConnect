@@ -22,13 +22,13 @@ dependencies:
       path: plugins/window_size
   flutter_lints: ^2.0.1
   mobile_scanner: ^1.0.0
-  # nfc_manager: ^3.2.0
+  nfc_manager: ^3.2.0
   firebase_core: ^2.8.0
   firebase_auth: ^4.3.0
   cloud_firestore: ^4.4.5
   firebase_storage: ^11.0.16
   fluttertoast: ^8.2.1
-  nfc_in_flutter: ^2.0.3
+  # nfc_in_flutter: ^2.0.3
   http: ^0.13.3
 
 dev_dependencies:
