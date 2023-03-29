@@ -1,28 +1,25 @@
-import 'dart:async';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:pune_connect/src/widgets/round_button.dart';
 import 'package:pune_connect/src/widgets/utils.dart';
 import 'package:pune_connect/src/routing/route_state.dart';
 
 
-import 'package:pune_connect/src/widgets/round_button.dart';
-class SignupScreen extends StatefulWidget {
-  const SignupScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<SignupScreen> createState() => _SignupScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _SignupScreenState extends State<SignupScreen>
+class _LoginScreenState extends State<LoginScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final auth = FirebaseAuth.instance;
   bool isLoading = false;
-
-  FirebaseAuth auth = FirebaseAuth.instance;
 
   @override
   void initState() {
@@ -52,7 +49,7 @@ class _SignupScreenState extends State<SignupScreen>
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: const Text('Signup'),
+          title: const Text('Login'),
         ),
         body: Padding(
             padding: const EdgeInsets.all(20),
@@ -98,70 +95,41 @@ class _SignupScreenState extends State<SignupScreen>
                       ],
                     )),
                 RoundButton(
-                  title: 'SignUp',
-                  isLoading: isLoading,
-                  onTap: () async {
+                  title: 'Login',
+                  onTap: () async{
                     if (_formKey.currentState!.validate()) {
-                      // setState(() {
-                      //   isLoading = true;
-                      // });
-                      //   auth
-                      //       .createUserWithEmailAndPassword(
-                      //           email: emailController.text,
-                      //           password: passwordController.text.toString())
-                      //       .then((value) {
-                      //         setState(() {
-                      //           isLoading = false;
-                      //         });
-                      //         })
-                      //       .onError((error, stack) {
-                      //         Utils().toastMessage(error.toString());
-                      //         setState(() {
-                      //           isLoading = false;
-                      //         });
-                      //       });
+                      // print(emailController.text);
+                      // print(passwordController.text);
                       try {
                         setState(() {
                           isLoading = true;
                         });
-                        UserCredential userCredential = await FirebaseAuth
-                            .instance
-                            .createUserWithEmailAndPassword(
-                                email: emailController.text,
-                                password: passwordController.text.toString())
-                            .then((value) {
+                        UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+                          email: emailController.text,
+                          password: passwordController.text.toString(),
+                        ).then((value) {
                                 routeState.go('/home');
                                 return value;
                         });
                       } on FirebaseAuthException catch (e) {
-                        setState(() {
-                          isLoading = false;
-                        });
-                        if (e.code == 'weak-password') {
-                          Utils().toastMessage(
-                              'The password provided is too weak.');
-                        } else if (e.code == 'email-already-in-use') {
-                          Utils().toastMessage(
-                              'The account already exists for that email.');
+                        if (e.code == 'user-not-found') {
+                          Utils().toastMessage('No user found for that email.');
+                        } else if (e.code == 'wrong-password') {
+                          Utils().toastMessage('Wrong password provided for that user.');
                         }
-                      } catch (e) {
-                        setState(() {
-                          isLoading = false;
-                        });
-                        print(e);
                       }
-                    }
+                    };
                   },
                 ),
                 const SizedBox(height: 20),
                 Row(
                   children: [
-                    const Text('Already Have an account?'),
+                    const Text('Dont Have an account?'),
                     TextButton(
                       onPressed: () {
-                        routeState.go('/login');
+                        routeState.go('/signin');
                       },
-                      child: const Text('Log In'),
+                      child: const Text('Sign Up'),
                     )
                   ],
                 )
