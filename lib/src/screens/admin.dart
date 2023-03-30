@@ -6,6 +6,7 @@ import 'package:permission_handler/permission_handler.dart';
 // import 'package:nfc_in_flutter/nfc_in_flutter.dart';
 
 import 'dart:convert';
+
 class AdminScreen extends StatefulWidget {
   const AdminScreen({Key? key}) : super(key: key);
 
@@ -23,8 +24,8 @@ class _AdminScreenState extends State<AdminScreen> {
   Future<PermissionStatus> _getCameraPermission() async {
     var status = await Permission.camera.status;
     if (!status.isGranted) {
-        final result = await Permission.camera.request();
-        return result;
+      final result = await Permission.camera.request();
+      return result;
     } else {
       return status;
     }
@@ -35,57 +36,56 @@ class _AdminScreenState extends State<AdminScreen> {
   // };
 
   Future<void> _processNfcData() => showDialog<String>(
-    context: context,
-    builder: (context) => AlertDialog(
-      title: const Text('Alert!'),
-      content: Text('NFC Message: ${result.value}'),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context, 'Cancel'),
-          child: const Text('Cancel'),
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Alert!'),
+          content: Text('NFC Message: ${result.value}'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'Cancel'),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'OK'),
+              child: const Text('OK'),
+            ),
+          ],
         ),
-        TextButton(
-          onPressed: () => Navigator.pop(context, 'OK'),
-          child: const Text('OK'),
-        ),
-      ],
-    ),
-  );
+      );
   Future<void> _NfcNotAvailable() => showDialog<String>(
-    context: context,
-    builder: (context) => AlertDialog(
-      title: const Text('Alert!'),
-      content: Text('NFC not available'),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context, 'Cancel'),
-          child: const Text('Cancel'),
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Alert!'),
+          content: Text('NFC not available'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'Cancel'),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'OK'),
+              child: const Text('OK'),
+            ),
+          ],
         ),
-        TextButton(
-          onPressed: () => Navigator.pop(context, 'OK'),
-          child: const Text('OK'),
-        ),
-      ],
-    ),
-  );
+      );
 
-  void checkNfc() async{    
+  void checkNfc() async {
     _isAvailable = await NfcManager.instance.isAvailable();
 
-    if(_isAvailable){
+    if (_isAvailable) {
       await NfcManager.instance.startSession(onDiscovered: (tag) async {
         result.value = tag.data;
         // NfcManager.instance.stopSession();
         await _processNfcData();
       });
-    }
-    else{
+    } else {
       await _NfcNotAvailable();
     }
   }
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     checkNfc();
     // NFC.readNDEF().listen((NDEFMessage message) {
@@ -137,10 +137,10 @@ class _AdminScreenState extends State<AdminScreen> {
         ],
       ),
       body: MobileScanner(
-            allowDuplicates: true,
-            controller: cameraController,
-            onDetect: _foundBarcode,
-          ),
+        allowDuplicates: true,
+        controller: cameraController,
+        onDetect: _foundBarcode,
+      ),
     );
   }
   //nfc reader function
@@ -151,23 +151,23 @@ class _AdminScreenState extends State<AdminScreen> {
   //     await NfcManager.instance.stopSession();
   //     _foundBarcode;
 
-      // showDialog<String>(
-      //         context: context,
-      //         builder: (context) => AlertDialog(
-      //           title: const Text('Alert!'),
-      //           content: const Text('The alert description goes here.'),
-      //           actions: [
-      //             TextButton(
-      //               onPressed: () => Navigator.pop(context, 'Cancel'),
-      //               child: const Text('Cancel'),
-      //             ),
-      //             TextButton(
-      //               onPressed: () => Navigator.pop(context, 'OK'),
-      //               child: const Text('OK'),
-      //             ),
-      //           ],
-      //         ),
-      //       );
+  // showDialog<String>(
+  //         context: context,
+  //         builder: (context) => AlertDialog(
+  //           title: const Text('Alert!'),
+  //           content: const Text('The alert description goes here.'),
+  //           actions: [
+  //             TextButton(
+  //               onPressed: () => Navigator.pop(context, 'Cancel'),
+  //               child: const Text('Cancel'),
+  //             ),
+  //             TextButton(
+  //               onPressed: () => Navigator.pop(context, 'OK'),
+  //               child: const Text('OK'),
+  //             ),
+  //           ],
+  //         ),
+  //       );
   //   });
   // }
 
@@ -177,8 +177,12 @@ class _AdminScreenState extends State<AdminScreen> {
       final String code = barcode.rawValue ?? "---";
       debugPrint('Barcode found! $code');
       _screenOpened = true;
-      Navigator.push(context, MaterialPageRoute(builder: (context) =>
-          FoundCodeScreen(screenClosed: _screenWasClosed, value: code),));
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                FoundCodeScreen(screenClosed: _screenWasClosed, value: code),
+          ));
     }
   }
 
@@ -212,7 +216,9 @@ class _FoundCodeScreenState extends State<FoundCodeScreen> {
             widget.screenClosed();
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back_outlined,),
+          icon: Icon(
+            Icons.arrow_back_outlined,
+          ),
         ),
       ),
       body: Center(
@@ -221,9 +227,21 @@ class _FoundCodeScreenState extends State<FoundCodeScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text("Scanned Code:", style: TextStyle(fontSize: 20,),),
-              SizedBox(height: 20,),
-              Text(widget.value, style: TextStyle(fontSize: 16,),),
+              Text(
+                "Scanned Code:",
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                widget.value,
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
             ],
           ),
         ),
