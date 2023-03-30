@@ -1,11 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import '../data/library.dart';
 import '../routing.dart';
 import '../widgets/issued_pass.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 // class AuthorsScreen extends StatelessWidget {
 //   final String title = 'Authors';
@@ -36,9 +38,15 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FirebaseAuth auth = FirebaseAuth.instance;
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
 
     final user = auth.currentUser?.displayName;
     final uid = auth.currentUser?.uid;
+    var aadhar;
+    firestore.collection('users').doc(uid).get().then((ds) {
+      aadhar = ds.get('adhar');
+    });
+    String myaadhar = aadhar as String;
 
     return Scaffold(
         appBar: AppBar(
@@ -47,7 +55,7 @@ class HomeScreen extends StatelessWidget {
             IconButton(
               icon: const Icon(Icons.logout_outlined),
               tooltip: 'Open shopping cart',
-              onPressed: () async{
+              onPressed: () async {
                 await auth.signOut();
                 RouteStateScope.of(context).go('/login');
               },
@@ -73,7 +81,7 @@ class HomeScreen extends StatelessWidget {
                           Container(
                             height: 200,
                             child: QrImage(
-                              data: uid??"",
+                              data: myaadhar,
                               version: QrVersions.auto,
                               size: 200.0,
                             ),
