@@ -5,6 +5,7 @@ import '../data/library.dart';
 import '../routing.dart';
 import '../widgets/book_list.dart';
 import '../widgets/issued_pass.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 // class AuthorsScreen extends StatelessWidget {
 //   final String title = 'Authors';
@@ -31,9 +32,23 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseAuth auth = FirebaseAuth.instance;
+
+    final user = auth.currentUser?.displayName;
+
     return Scaffold(
         appBar: AppBar(
           title: Text(title),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.logout_outlined),
+              tooltip: 'Open shopping cart',
+              onPressed: () async{
+                await auth.signOut();
+                RouteStateScope.of(context).go('/login');
+              },
+            ),
+          ],
         ),
         body: Column(
           children: [
@@ -48,7 +63,7 @@ class HomeScreen extends StatelessWidget {
                         // ignore: prefer_const_constructors
                         Padding(
                           padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 16),
-                          child: const Text("Hii Aakash"),
+                          child: Text('Hii $user'),
                         ),
                         if (libraryInstance.allIssuedPasses.isNotEmpty)
                           Container(

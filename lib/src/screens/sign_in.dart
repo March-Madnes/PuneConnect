@@ -2,10 +2,11 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:pune_connect/src/widgets/utils.dart';
 import 'package:pune_connect/src/routing/route_state.dart';
 
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pune_connect/src/widgets/round_button.dart';
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -17,12 +18,16 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
+
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final nameController = TextEditingController();
+  final adharController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  bool isLoading = false;
 
+  bool isLoading = false;
   FirebaseAuth auth = FirebaseAuth.instance;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   @override
   void initState() {
@@ -36,11 +41,14 @@ class _SignupScreenState extends State<SignupScreen>
     super.dispose();
     emailController.dispose();
     passwordController.dispose();
+    nameController.dispose();
+    adharController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final routeState = RouteStateScope.of(context);
+    // redirect to home if user is already logged in
     auth
     .authStateChanges()
     .listen((User? user) {
@@ -64,6 +72,36 @@ class _SignupScreenState extends State<SignupScreen>
                     key: _formKey,
                     child: Column(
                       children: [
+                        TextFormField(
+                          keyboardType: TextInputType.text,
+                          controller: nameController,
+                          decoration: const InputDecoration(
+                            hintText: 'Name',
+                            border: OutlineInputBorder(),
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter name';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 20),
+                        TextFormField(
+                          keyboardType: TextInputType.number,
+                          controller: adharController,
+                          decoration: const InputDecoration(
+                            hintText: 'Adhar Number',
+                            border: OutlineInputBorder(),
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter Adhar';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 20),
                         TextFormField(
                           keyboardType: TextInputType.emailAddress,
                           controller: emailController,
@@ -129,7 +167,13 @@ class _SignupScreenState extends State<SignupScreen>
                             .createUserWithEmailAndPassword(
                                 email: emailController.text,
                                 password: passwordController.text.toString())
-                            .then((value) {
+                            .then((value) async{
+                                await auth.currentUser?.updateDisplayName(nameController.text);
+                                await firestore.collection("users").add({
+                                  'name': nameController.text,
+                                  'email': emailController.text,
+                                  'adhar': adharController.text,
+                                });
                                 routeState.go('/home');
                                 return value;
                         });

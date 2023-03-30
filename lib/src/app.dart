@@ -17,7 +17,7 @@ class PuneConnect extends StatefulWidget {
 }
 
 class _PuneConnectState extends State<PuneConnect> {
-  // final _auth = PuneConnectAuth();
+  
   final _navigatorKey = GlobalKey<NavigatorState>();
   late final RouteState _routeState;
   late final SimpleRouterDelegate _routerDelegate;
