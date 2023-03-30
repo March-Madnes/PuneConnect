@@ -5,6 +5,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import '../data/library.dart';
 import '../routing.dart';
 import '../widgets/issued_pass.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 // class AuthorsScreen extends StatelessWidget {
 //   final String title = 'Authors';
@@ -25,8 +26,8 @@ import '../widgets/issued_pass.dart';
 //       );
 // }
 
-final auth = FirebaseAuth.instance;
-final User? user = FirebaseAuth.instance.currentUser;
+// final auth = FirebaseAuth.instance;
+// final String User? user = FirebaseAuth.instance.currentUser;
 
 class HomeScreen extends StatelessWidget {
   final String title = 'Pune Connect';
@@ -34,9 +35,24 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseAuth auth = FirebaseAuth.instance;
+
+    final user = auth.currentUser?.displayName;
+    final uid = auth.currentUser?.uid;
+
     return Scaffold(
         appBar: AppBar(
           title: Text(title),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.logout_outlined),
+              tooltip: 'Open shopping cart',
+              onPressed: () async{
+                await auth.signOut();
+                RouteStateScope.of(context).go('/login');
+              },
+            ),
+          ],
         ),
         body: Column(
           children: [
@@ -51,13 +67,13 @@ class HomeScreen extends StatelessWidget {
                         // ignore: prefer_const_constructors
                         Padding(
                           padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 16),
-                          child: const Text("Hii Aakash"),
+                          child: Text('Hii $user'),
                         ),
                         if (libraryInstance.allIssuedPasses.isNotEmpty)
                           Container(
                             height: 200,
                             child: QrImage(
-                              data: user!.uid,
+                              data: uid??"",
                               version: QrVersions.auto,
                               size: 200.0,
                             ),
