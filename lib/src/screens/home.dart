@@ -1,11 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:pune_connect/src/widgets/book_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+
 import '../data/library.dart';
 import '../routing.dart';
-import '../widgets/book_list.dart';
 import '../widgets/issued_pass.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 
 // class AuthorsScreen extends StatelessWidget {
 //   final String title = 'Authors';
