@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pune_connect/src/widgets/book_list.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import '../data/library.dart';
 import '../routing.dart';
 import '../widgets/book_list.dart';
 import '../widgets/issued_pass.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 // class AuthorsScreen extends StatelessWidget {
@@ -25,6 +26,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 //         ),
 //       );
 // }
+
+final auth = FirebaseAuth.instance;
+final User? user = FirebaseAuth.instance.currentUser;
 
 class HomeScreen extends StatelessWidget {
   final String title = 'Pune Connect';
@@ -68,9 +72,10 @@ class HomeScreen extends StatelessWidget {
                         if (libraryInstance.allIssuedPasses.isNotEmpty)
                           Container(
                             height: 200,
-                            child: Image.asset(
-                              'assets/images/1.png',
-                              fit: BoxFit.cover,
+                            child: QrImage(
+                              data: user!.uid,
+                              version: QrVersions.auto,
+                              size: 200.0,
                             ),
                           ),
                         if (libraryInstance.allIssuedPasses.isEmpty)
