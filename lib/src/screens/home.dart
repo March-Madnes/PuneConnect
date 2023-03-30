@@ -27,8 +27,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 //       );
 // }
 
-final auth = FirebaseAuth.instance;
-final User? user = FirebaseAuth.instance.currentUser;
+// final auth = FirebaseAuth.instance;
+// final String User? user = FirebaseAuth.instance.currentUser;
 
 class HomeScreen extends StatelessWidget {
   final String title = 'Pune Connect';
@@ -39,6 +39,7 @@ class HomeScreen extends StatelessWidget {
     FirebaseAuth auth = FirebaseAuth.instance;
 
     final user = auth.currentUser?.displayName;
+    final uid = auth.currentUser?.uid;
 
     return Scaffold(
         appBar: AppBar(
@@ -73,7 +74,7 @@ class HomeScreen extends StatelessWidget {
                           Container(
                             height: 200,
                             child: QrImage(
-                              data: user!.uid,
+                              data: uid??"",
                               version: QrVersions.auto,
                               size: 200.0,
                             ),
