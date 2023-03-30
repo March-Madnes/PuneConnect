@@ -8,6 +8,7 @@ import 'package:pune_connect/src/routing/route_state.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pune_connect/src/widgets/round_button.dart';
+
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
 
@@ -49,9 +50,7 @@ class _SignupScreenState extends State<SignupScreen>
   Widget build(BuildContext context) {
     final routeState = RouteStateScope.of(context);
     // redirect to home if user is already logged in
-    auth
-    .authStateChanges()
-    .listen((User? user) {
+    auth.authStateChanges().listen((User? user) {
       if (user == null) {
       } else {
         routeState.go('/home');
@@ -167,15 +166,17 @@ class _SignupScreenState extends State<SignupScreen>
                             .createUserWithEmailAndPassword(
                                 email: emailController.text,
                                 password: passwordController.text.toString())
-                            .then((value) async{
-                                await auth.currentUser?.updateDisplayName(nameController.text);
-                                await firestore.collection("users").add({
-                                  'name': nameController.text,
-                                  'email': emailController.text,
-                                  'adhar': adharController.text,
-                                });
-                                routeState.go('/home');
-                                return value;
+                            .then((value) async {
+                          await auth.currentUser
+                              ?.updateDisplayName(nameController.text);
+                          String uid = auth.currentUser!.uid;
+                          await firestore.collection("users").doc(uid).set({
+                            'name': nameController.text,
+                            'email': emailController.text,
+                            'adhar': adharController.text,
+                          });
+                          routeState.go('/home');
+                          return value;
                         });
                       } on FirebaseAuthException catch (e) {
                         setState(() {

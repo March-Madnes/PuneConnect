@@ -35,10 +35,10 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     FirebaseAuth auth = FirebaseAuth.instance;
 
-    final user = auth.currentUser?.displayName;
+    var user = auth.currentUser!.displayName;
     final uid = auth.currentUser?.uid;
 
     return Scaffold(

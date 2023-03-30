@@ -94,6 +94,7 @@ class _LoginScreenState extends State<LoginScreen>
                       ],
                     )),
                 RoundButton(
+                  isLoading: isLoading,
                   title: 'Login',
                   onTap: () async{
                     if (_formKey.currentState!.validate()) {
@@ -111,6 +112,9 @@ class _LoginScreenState extends State<LoginScreen>
                                 return value;
                         });
                       } on FirebaseAuthException catch (e) {
+                        setState(() {
+                          isLoading = false;
+                        });
                         if (e.code == 'user-not-found') {
                           Utils().toastMessage('No user found for that email.');
                         } else if (e.code == 'wrong-password') {
