@@ -86,7 +86,7 @@ class HomeScreen extends StatelessWidget {
                           Container(
                             height: 200,
                             child: QrImage(
-                              data: aadhar.toString(),
+                              data: uid.toString(),
                               version: QrVersions.auto,
                               size: 200.0,
                             ),
