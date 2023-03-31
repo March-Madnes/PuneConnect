@@ -33,6 +33,7 @@ import '../widgets/issued_pass.dart';
 // final auth = FirebaseAuth.instance;
 // final String User? user = FirebaseAuth.instance.currentUser;
 
+
 class HomeScreen extends StatelessWidget {
   final String title = 'Pune Connect';
   const HomeScreen({super.key});
@@ -52,9 +53,14 @@ class HomeScreen extends StatelessWidget {
         }
       }
     });
+    // libraryInstance.allIssuedPasses.forEach((element) {
+    //   print(element);
+    // });
 
     // String myaadhar = aadhar as String;
-
+    // setState(){
+  getData();
+// }
     return Scaffold(
         appBar: AppBar(
           title: Text(title),
@@ -94,20 +100,20 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                         if (libraryInstance.allIssuedPasses.isEmpty)
-                            Column(
-                              children: [
-                                const Text("No Passes Issued for the day"),
-                                Padding(
-                                  padding: const EdgeInsets.all(20),
-                                  child: FilledButton(
-                                    onPressed: () {
-                                      RouteStateScope.of(context).go('/book');
-                                    },
-                                    child: const Text("Issue Pass"),
-                                  ),
+                          Column(
+                            children: [
+                              const Text("No Passes Issued for the day"),
+                              Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: FilledButton(
+                                  onPressed: () {
+                                    RouteStateScope.of(context).go('/book');
+                                  },
+                                  child: const Text("Issue Pass"),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
+                          ),
                       ],
                     ),
                   ),
@@ -116,7 +122,7 @@ class HomeScreen extends StatelessWidget {
             ),
             Flexible(
               child: IssuedPassList(
-                passes: [IssuedPass(1, 1, 'hehe', DateTime(2023, 10, 13), 10, const Icon(Icons.abc_outlined))],
+                passes: libraryInstance.allIssuedPasses,
                 onTap: (issuedPass) {
                   print("Hello");
                 },

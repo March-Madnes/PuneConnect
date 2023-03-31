@@ -59,7 +59,7 @@ class _PassDetailsScreenState extends State<PassDetailsScreen> {
       'pass_type': widget.pass!.title,
       'time': DateTime.now(),
     };
-    return passes.doc(uid).set(data, SetOptions(merge: true))
+    return passes.doc(uid).collection(widget.pass!.passIndex.toString()).doc().set(data)
     .onError((e, _) => print("Error writing document: $e"));
     // Call the user's CollectionReference to add a new user
     // return passes

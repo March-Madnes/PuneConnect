@@ -37,7 +37,7 @@ class PuneConnectScaffold extends StatelessWidget {
             icon: Icons.add_box,
           ),
           AdaptiveScaffoldDestination(
-            title: 'Settings',
+            title: 'Profile',
             icon: Icons.admin_panel_settings,
           ),
         ],
