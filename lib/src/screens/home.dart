@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:pune_connect/src/data/issuedPass.dart';
+import 'package:pune_connect/src/data/pass.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import '../data/library.dart';
@@ -36,7 +38,7 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     FirebaseAuth auth = FirebaseAuth.instance;
     FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -86,20 +88,20 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                         if (libraryInstance.allIssuedPasses.isEmpty)
-                          Column(
-                            children: [
-                              const Text("No Passes Issued for the day"),
-                              Padding(
-                                padding: const EdgeInsets.all(20),
-                                child: FilledButton(
-                                  onPressed: () {
-                                    RouteStateScope.of(context).go('/book');
-                                  },
-                                  child: const Text("Issue Pass"),
+                            Column(
+                              children: [
+                                const Text("No Passes Issued for the day"),
+                                Padding(
+                                  padding: const EdgeInsets.all(20),
+                                  child: FilledButton(
+                                    onPressed: () {
+                                      RouteStateScope.of(context).go('/book');
+                                    },
+                                    child: const Text("Issue Pass"),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
+                              ],
+                            ),
                       ],
                     ),
                   ),
@@ -108,7 +110,7 @@ class HomeScreen extends StatelessWidget {
             ),
             Flexible(
               child: IssuedPassList(
-                passes: libraryInstance.allIssuedPasses,
+                passes: [IssuedPass(1, 1, 'hehe', DateTime(2023, 10, 13), 10, const Icon(Icons.abc_outlined))],
                 onTap: (issuedPass) {
                   print("Hello");
                 },
