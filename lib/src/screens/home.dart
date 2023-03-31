@@ -61,10 +61,10 @@ class _HomeScreenState extends State<HomeScreen> {
         });
       });     
     }
-    getData();
+    // getData();
     // String myaadhar = aadhar as String;
     // setState(){
-  getData();
+  // getData();
 // }
     return Scaffold(
         appBar: AppBar(

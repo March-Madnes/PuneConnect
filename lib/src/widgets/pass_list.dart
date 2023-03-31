@@ -30,7 +30,7 @@ class PassList extends StatelessWidget {
                     passes[index].title,
                   ),
                   leading: passes[index].passIcon,
-                  trailing: Text(passes[index].passIndex.toString()),
+                  trailing: Text(passes[index].price.toString()),
                   onTap: () =>  Navigator.push(context, MaterialPageRoute<void>(
                     builder: (context) {
                       return PassDetailsScreen(

@@ -61,10 +61,12 @@ Library libraryInstance = Library()
 class Library {
   final List<IssuedPass> allIssuedPasses = [];
   final List<Pass> allPasses = [
-    Pass(0, 'Daily Pass', 50, const Icon(Icons.abc_outlined)),
-    Pass(1, 'Women Pass', 40, const Icon(Icons.girl)),
-    Pass(2, 'Student Pass', 25, const Icon(Icons.person_2)),
-    Pass(3, 'Senior Citizen Pass', 40, const Icon(Icons.person_3))
+    Pass(0, 'PASS: Daily', 50, const Icon(Icons.abc_outlined)),
+    Pass(1, 'PASS: Women', 40, const Icon(Icons.abc_outlined)),
+    Pass(2, 'PASS: Students', 25, const Icon(Icons.abc_outlined)),
+    Pass(3, 'PASS: Senior Citizen', 40, const Icon(Icons.abc_outlined)),
+    Pass(4, 'TOUR: Aga Khan Palace', 25, const Icon(Icons.person_3)),
+    Pass(3, 'TOUR: Shanivar Wada', 20, const Icon(Icons.person_3))
   ];
   // constructor
   Library() {
