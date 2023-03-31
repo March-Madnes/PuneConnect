@@ -53,9 +53,11 @@ class _PassDetailsScreenState extends State<PassDetailsScreen> {
     FirebaseAuth auth = FirebaseAuth.instance;
     final uid = auth.currentUser?.uid;
     var data = {
+      'index': widget.pass!.passIndex,
       'full_name': auth.currentUser?.displayName,
       'price': widget.pass!.price,
       'pass_type': widget.pass!.title,
+      'time': DateTime.now(),
     };
     return passes.doc(uid).set(data, SetOptions(merge: true))
     .onError((e, _) => print("Error writing document: $e"));
