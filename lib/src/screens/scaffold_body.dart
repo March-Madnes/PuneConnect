@@ -5,7 +5,6 @@
 import 'package:flutter/material.dart';
 
 import '../routing.dart';
-import '../screens/settings.dart';
 import '../widgets/fade_transition_page.dart';
 import 'book_pass.dart';
 import 'admin.dart';
@@ -38,7 +37,7 @@ class PuneConnectScaffoldBody extends StatelessWidget {
         else if (currentRoute.pathTemplate.startsWith('/settings'))
           const FadeTransitionPage<void>(
             key: ValueKey('settings'),
-            child: AdminScreen(),
+            child: profile(),
           )
         else if (currentRoute.pathTemplate.startsWith('/home') ||
             currentRoute.pathTemplate == '/')
@@ -47,12 +46,6 @@ class PuneConnectScaffoldBody extends StatelessWidget {
             child: HomeScreen(),
           )
 
-        // Avoid building a Navigator with an empty `pages` list when the
-        // RouteState is set to an unexpected path, such as /signin.
-        //
-        // Since RouteStateScope is an InheritedNotifier, any change to the
-        // route will result in a call to this build method, even though this
-        // widget isn't built when those routes are active.
         else
           FadeTransitionPage<void>(
             key: const ValueKey('empty'),
