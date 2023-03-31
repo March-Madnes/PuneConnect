@@ -46,8 +46,14 @@ class HomeScreen extends StatelessWidget {
     final uid = auth.currentUser?.uid;
     var aadhar;
     firestore.collection('users').doc(uid).get().then((ds) {
-      aadhar = ds.get('adhar');
+      if (ds.exists) {
+        if (ds.data()!.containsKey('adhar')) {
+          aadhar = ds.get('adhar');
+        }
+      }
     });
+
+    // String myaadhar = aadhar as String;
 
     return Scaffold(
         appBar: AppBar(
@@ -82,7 +88,7 @@ class HomeScreen extends StatelessWidget {
                           Container(
                             height: 200,
                             child: QrImage(
-                              data: 'Sahil',
+                              data: uid.toString(),
                               version: QrVersions.auto,
                               size: 200.0,
                             ),
