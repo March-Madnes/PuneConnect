@@ -33,26 +33,34 @@ import '../widgets/issued_pass.dart';
 // final auth = FirebaseAuth.instance;
 // final String User? user = FirebaseAuth.instance.currentUser;
 
-class HomeScreen extends StatelessWidget {
-  final String title = 'Pune Connect';
+class HomeScreen extends StatefulWidget {
+
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final String title = 'Pune Connect';  
+  dynamic fAadhar;
+  
+  FirebaseAuth auth = FirebaseAuth.instance;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  @override
   Widget build(BuildContext context) {
-    FirebaseAuth auth = FirebaseAuth.instance;
-    FirebaseFirestore firestore = FirebaseFirestore.instance;
 
     var user = auth.currentUser!.displayName;
     final uid = auth.currentUser?.uid;
-    var aadhar;
-    firestore.collection('users').doc(uid).get().then((ds) {
-      if (ds.exists) {
-        if (ds.data()!.containsKey('adhar')) {
-          aadhar = ds.get('adhar');
-        }
-      }
-    });
-
+    
+    getData() async {
+      await firestore.collection("users").doc(uid).get().then((ds){
+        setState(() {
+          fAadhar = ds.data()?['adhar'];
+        });
+      });     
+    }
+    getData();
     // String myaadhar = aadhar as String;
 
     return Scaffold(
@@ -88,7 +96,7 @@ class HomeScreen extends StatelessWidget {
                           Container(
                             height: 200,
                             child: QrImage(
-                              data: uid.toString(),
+                              data: fAadhar.toString(),
                               version: QrVersions.auto,
                               size: 200.0,
                             ),
