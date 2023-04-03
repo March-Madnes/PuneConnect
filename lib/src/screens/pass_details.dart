@@ -86,15 +86,20 @@ class _PassDetailsScreenState extends State<PassDetailsScreen> {
       body: Center(
         child: Column(
           children: [
+            const SizedBox(
+              height: 20,
+            ),
             Text(
               widget.pass!.title,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             Text(
-              widget.pass!.price.toString(),
+              'Price: ₹ '+widget.pass!.price.toString(),
               style: Theme.of(context).textTheme.titleMedium,
             ),
-            Text('hello pass details'),
+            Padding(padding: EdgeInsets.all(20.0),
+            child: const Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, \n quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
+            ),
             TextButton(
               style: ButtonStyle(
                 foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
@@ -114,7 +119,7 @@ class _PassDetailsScreenState extends State<PassDetailsScreen> {
                 };
                 _razorpay.open(options);
               },
-              child: Text('TextButton'),
+              child: Text('Book Now'),
             )
 
             // TextButton(

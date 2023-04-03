@@ -79,7 +79,7 @@ class _profileState extends State<profile> with SingleTickerProviderStateMixin {
               CircularPercentIndicator(
                 radius: 100.0,
                 lineWidth: 10.0,
-                percent: 0.8,
+                percent: 0.1,
                 center: Image.asset("assets/images/users.png",height: 100, width: 200,),
                 // center: const Icon(
                 //   Icons.person_pin,
@@ -111,7 +111,7 @@ class _profileState extends State<profile> with SingleTickerProviderStateMixin {
                 height: 20,
               ),
               const Text(
-                "Eco Points: 0",
+                "Eco Points: 20",
                 style: TextStyle(
                   fontSize: 16,
                 ),

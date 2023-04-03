@@ -17,18 +17,14 @@ CollectionReference _collectionRef =
     FirebaseFirestore.instance.collection('passes');
 
 Future<void> getData() async {
-    // Get docs from collection reference
-    QuerySnapshot querySnapshot = await _collectionRef.get();
+  // Get docs from collection reference
+  QuerySnapshot querySnapshot = await _collectionRef.get();
 
-    // Get data from docs and convert map to List
-    final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
+  // Get data from docs and convert map to List
+  final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
 
-    print(allData);
+  print(allData);
 }
-
-
-
-
 
 Library libraryInstance = Library()
 ..addPass(passIndex: 0, issueDate: DateTime(2023, 10, 13));
@@ -61,12 +57,12 @@ Library libraryInstance = Library()
 class Library {
   final List<IssuedPass> allIssuedPasses = [];
   final List<Pass> allPasses = [
-    Pass(0, 'PASS: Daily', 50, const Icon(Icons.abc_outlined)),
-    Pass(1, 'PASS: Women', 40, const Icon(Icons.abc_outlined)),
-    Pass(2, 'PASS: Students', 25, const Icon(Icons.abc_outlined)),
-    Pass(3, 'PASS: Senior Citizen', 40, const Icon(Icons.abc_outlined)),
-    Pass(4, 'TOUR: Aga Khan Palace', 25, const Icon(Icons.person_3)),
-    Pass(3, 'TOUR: Shanivar Wada', 20, const Icon(Icons.person_3))
+    Pass(0, 'Pass: Daily', 50, const Icon(Icons.abc_outlined)),
+    Pass(1, 'Pass: Women', 40, const Icon(Icons.abc_outlined)),
+    Pass(2, 'Pass: Students', 25, const Icon(Icons.abc_outlined)),
+    Pass(3, 'Pass: Senior Citizen', 40, const Icon(Icons.abc_outlined)),
+    Pass(4, 'Tour: Aga Khan Palace', 25, const Icon(Icons.person_3)),
+    Pass(3, 'Tour: Shanivar Wada', 20, const Icon(Icons.person_3))
   ];
   // constructor
   Library() {

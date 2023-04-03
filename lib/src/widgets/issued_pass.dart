@@ -33,7 +33,7 @@ class IssuedPassList extends StatelessWidget {
                   passes[index].issueDate.toString(),
                 ),
                 leading: passes[index].passIcon,
-                trailing: Text(passes[index].id.toString()),
+                trailing: Text(passes[index].price.toString()),
                 // onTap: () =>  Navigator.push(context, MaterialPageRoute<void>(
                 //   builder: (context) {
                 //     return IssuedPassDetailsScreen(
