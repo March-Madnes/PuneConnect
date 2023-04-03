@@ -99,15 +99,12 @@ The user must have flutter installed in their pc and little knowledge of flutter
 
 <h3>Auth and Payment</h3>
 
-![2](https://user-images.githubusercontent.com/91362856/229530834-9ee015be-6b01-4afd-9d88-3cc6444e6ae0.jpg)
-![1](https://user-images.githubusercontent.com/91362856/229530850-fefd5bf9-0a50-4607-990c-58092708f5ea.jpg)
-![3](https://user-images.githubusercontent.com/91362856/229530869-7a895763-4566-494f-a6e4-3de7543b161a.jpg)
+<img src="https://user-images.githubusercontent.com/91362856/229530834-9ee015be-6b01-4afd-9d88-3cc6444e6ae0.jpg" alt="Logo" width="200"> <img src="https://user-images.githubusercontent.com/91362856/229530850-fefd5bf9-0a50-4607-990c-58092708f5ea.jpg" alt="Logo" width="200"> <img src="https://user-images.githubusercontent.com/91362856/229530869-7a895763-4566-494f-a6e4-3de7543b161a.jpg" alt="Logo" width="200">    
 
 
 <h3>Book Passes</h3>
-![4](https://user-images.githubusercontent.com/91362856/229530899-82b7920e-0921-4d42-9526-c5f1e74b5092.jpg)
-![5](https://user-images.githubusercontent.com/91362856/229530908-c93a78fb-6ed5-45cb-99f1-7bdc0157267f.jpg)
-![6](https://user-images.githubusercontent.com/91362856/229530919-9e2a96bd-4f72-4ef0-abf6-0ebe96cb529a.jpg)
+
+<img src="https://user-images.githubusercontent.com/91362856/229530899-82b7920e-0921-4d42-9526-c5f1e74b5092.jpg" alt="Logo" width="200"> <img src="https://user-images.githubusercontent.com/91362856/229530908-c93a78fb-6ed5-45cb-99f1-7bdc0157267f.jpg" alt="Logo" width="200"> <img src="https://user-images.githubusercontent.com/91362856/229530919-9e2a96bd-4f72-4ef0-abf6-0ebe96cb529a.jpg" alt="Logo" width="200">    
 
 
 
