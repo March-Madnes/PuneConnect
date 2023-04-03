@@ -1,6 +1,3 @@
-// Copyright 2021, the Flutter project authors. Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
 import 'package:firebase_storage/firebase_storage.dart';
 
 import 'issuedPass.dart';
@@ -27,9 +24,7 @@ Future<void> getData() async {
 }
 
 Library libraryInstance = Library()
-..addPass(passIndex: 0, issueDate: DateTime(2023, 10, 13));
-
-// ..addBook(
+  ..addPass(passIndex: 0, issueDate: DateTime(2023, 10, 13));
 //     title: 'Left Hand of Darkness',
 //     authorName: 'Ursula K. Le Guin',
 //     isPopular: true,
@@ -65,17 +60,7 @@ class Library {
     Pass(3, 'Tour: Shanivar Wada', 20, const Icon(Icons.person_3))
   ];
   // constructor
-  Library() {
-    // while(true){
-    //   allIssuedPasses.add(IssuedPass(
-    //       allIssuedPasses.length,
-    //       i,
-    //       allPasses[i].title,
-    //       DateTime(2023, 10, 13),
-    //       allPasses[i].price,
-    //       allPasses[i].passIcon));
-    // }
-  }
+  Library();
 
   void addPass({
     required int passIndex,
@@ -90,32 +75,4 @@ class Library {
         allPasses[passIndex].passIcon);
     allIssuedPasses.add(issuedPass);
   }
-
-//   void addBook({
-//     required String title,
-//     required String authorName,
-//     required bool isPopular,
-//     required bool isNew,
-//   }) {
-//     var author = allAuthors.firstWhere(
-//       (author) => author.name == authorName,
-//       orElse: () {
-//         final value = Author(allAuthors.length, authorName);
-//         allAuthors.add(value);
-//         return value;
-//       },
-//     );
-//     var book = Book(allBooks.length, title, isPopular, isNew, author);
-
-//     author.books.add(book);
-//     allBooks.add(book);
-//   }
-
-//   List<Book> get popularBooks => [
-//         ...allBooks.where((book) => book.isPopular),
-//       ];
-
-//   List<Book> get newBooks => [
-//         ...allBooks.where((book) => book.isNew),
-//       ];
 }

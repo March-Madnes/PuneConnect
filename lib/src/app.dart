@@ -1,7 +1,3 @@
-// Copyright 2021, the Flutter project authors. Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
-
 import 'package:flutter/material.dart';
 import 'package:pune_connect/src/screens/home.dart';
 
@@ -33,13 +29,8 @@ class _PuneConnectState extends State<PuneConnect> {
         '/authors',
         '/home',
         '/settings',
-        '/books/new',
-        '/books/all',
-        '/books/popular',
-        '/book/:bookId',
         '/pass/:passId',
-        '/issuedPass/:issuedPassId'
-        '/author/:authorId',
+        '/issuedPass/:issuedPassId',
       ],
       initialRoute: '/signin',
     );
@@ -100,26 +91,6 @@ class _PuneConnectState extends State<PuneConnect> {
         // ),
       );
 
-  // Future<ParsedRoute> _guard(ParsedRoute from) async {
-  //   // final signedIn = _auth.signedIn;
-  //   final signInRoute = ParsedRoute('/signin', '/signin', {}, {});
-
-  //   // Go to /signin if the user is not signed in
-  //   if (!signedIn && from != signInRoute) {
-  //     return signInRoute;
-  //   }
-  //   // Go to /home if the user is signed in and tries to go to /signin.
-  //   else if (signedIn && from == signInRoute) {
-  //     return ParsedRoute('/home', '/home', {}, {});
-  //   }
-  //   return from;
-  // }
-
-  // void _handleAuthStateChanged() {
-  //   if (!_auth.signedIn) {
-  //     _routeState.go('/signin');
-  //   }
-  // }
 
   @override
   void dispose() {

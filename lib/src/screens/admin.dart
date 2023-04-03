@@ -31,42 +31,9 @@ class _profileState extends State<profile> with SingleTickerProviderStateMixin {
     var user = auth.currentUser!.displayName;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Profile"),
+        title: const Text("Profile"),
       ),
       body: Center(
-        // child: Column(
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   children: [
-        //     Padding(padding: EdgeInsets.all(80),
-        //       child: Image.asset("assets/images/users.png", fit: BoxFit.cover),
-        //     ),
-        //     Text(
-        //       "Name: $user",
-        //       style: TextStyle(
-        //         fontSize: 20,
-        //       ),
-        //     ),
-        //     const SizedBox(
-        //       height: 20,
-        //     ),
-        //     Text(
-        //       "Email: ${auth.currentUser!.email}",
-        //       style: TextStyle(
-        //         fontSize: 16,
-        //       ),
-        //     ),
-        //     const SizedBox(
-        //       height: 20,
-        //     ),
-        //     const Text(
-        //       "Eco Points: 0",
-        //       style: TextStyle(
-        //         fontSize: 16,
-        //       ),
-        //     ),
-            
-        //   ],
-        // ),
         
         child:
         ListView(
@@ -81,11 +48,6 @@ class _profileState extends State<profile> with SingleTickerProviderStateMixin {
                 lineWidth: 10.0,
                 percent: 0.1,
                 center: Image.asset("assets/images/users.png",height: 100, width: 200,),
-                // center: const Icon(
-                //   Icons.person_pin,
-                //   size: 50.0,
-                //   color: Colors.blue,
-                // ),
                 backgroundColor: Colors.grey,
                 progressColor: Colors.blue,
               ),
@@ -94,7 +56,7 @@ class _profileState extends State<profile> with SingleTickerProviderStateMixin {
               ),
               Text(
                 "Name: $user",
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20,
                 ),
               ),
@@ -103,7 +65,7 @@ class _profileState extends State<profile> with SingleTickerProviderStateMixin {
               ),
               Text(
                 "Email: ${auth.currentUser!.email}",
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                 ),
               ),

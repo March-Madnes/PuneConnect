@@ -1,38 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:pune_connect/src/data/issuedPass.dart';
-import 'package:pune_connect/src/data/pass.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import '../data/library.dart';
 import '../routing.dart';
 import '../widgets/issued_pass.dart';
-
-// class AuthorsScreen extends StatelessWidget {
-//   final String title = 'Authors';
-
-//   const AuthorsScreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context) => Scaffold(
-//         appBar: AppBar(
-//           title: Text(title),
-//         ),
-//         body: AuthorList(
-//           authors: libraryInstance.allAuthors,
-//           onTap: (author) {
-//             RouteStateScope.of(context).go('/author/${author.id}');
-//           },
-//         ),
-//       );
-// }
-
-// final auth = FirebaseAuth.instance;
-// final String User? user = FirebaseAuth.instance.currentUser;
-
 
 class HomeScreen extends StatefulWidget {
   final String title = 'Pune Connect';
@@ -61,11 +35,6 @@ class _HomeScreenState extends State<HomeScreen> {
         });
       });     
     }
-    // getData();
-    // String myaadhar = aadhar as String;
-    // setState(){
-  // getData();
-// }
     return Scaffold(
         appBar: AppBar(
           title: Text(title),

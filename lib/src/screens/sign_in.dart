@@ -139,24 +139,6 @@ class _SignupScreenState extends State<SignupScreen>
                   isLoading: isLoading,
                   onTap: () async {
                     if (_formKey.currentState!.validate()) {
-                      // setState(() {
-                      //   isLoading = true;
-                      // });
-                      //   auth
-                      //       .createUserWithEmailAndPassword(
-                      //           email: emailController.text,
-                      //           password: passwordController.text.toString())
-                      //       .then((value) {
-                      //         setState(() {
-                      //           isLoading = false;
-                      //         });
-                      //         })
-                      //       .onError((error, stack) {
-                      //         Utils().toastMessage(error.toString());
-                      //         setState(() {
-                      //           isLoading = false;
-                      //         });
-                      //       });
                       try {
                         setState(() {
                           isLoading = true;

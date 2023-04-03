@@ -1,7 +1,3 @@
-// Copyright 2021, the Flutter project authors. Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
-
 import 'package:flutter/material.dart';
 import 'package:url_launcher/link.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
@@ -61,11 +57,6 @@ class _PassDetailsScreenState extends State<PassDetailsScreen> {
     };
     return passes.doc(uid).collection(widget.pass!.passIndex.toString()).doc().set(data)
     .onError((e, _) => print("Error writing document: $e"));
-    // Call the user's CollectionReference to add a new user
-    // return passes
-    //     .add({'full_name': 'Sahil Kamate', 'age': 19, 'price': 40})
-    //     .then((value) => print("User Pass Added"))
-    //     .catchError((error) => print("Failed to add user pass: $error"));
   }
 
   @override
@@ -97,8 +88,8 @@ class _PassDetailsScreenState extends State<PassDetailsScreen> {
               'Price: ₹ '+widget.pass!.price.toString(),
               style: Theme.of(context).textTheme.titleMedium,
             ),
-            Padding(padding: EdgeInsets.all(20.0),
-            child: const Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, \n quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
+            const Padding(padding: EdgeInsets.all(20.0),
+            child: Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, \n quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
             ),
             TextButton(
               style: ButtonStyle(
@@ -121,25 +112,6 @@ class _PassDetailsScreenState extends State<PassDetailsScreen> {
               },
               child: Text('Book Now'),
             )
-
-            // TextButton(
-            //   child: const Text('View author (Push)'),
-            //   onPressed: () {
-            //     Navigator.of(context).push<void>(
-            //       MaterialPageRoute<void>(
-            //         builder: (context) =>
-            //             AuthorDetailsScreen(author: pass!.author),
-            //       ),
-            //     );
-            //   },
-            // ),
-            // Link(
-            //   uri: Uri.parse('/author/${pass!.author.id}'),
-            //   builder: (context, followLink) => TextButton(
-            //     onPressed: followLink,
-            //     child: const Text('View author (Link)'),
-            //   ),
-            // ),
           ],
         ),
       ),
