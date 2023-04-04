@@ -45,47 +45,44 @@ class _profileState extends State<profile> with SingleTickerProviderStateMixin {
               ),
               CircularPercentIndicator(
                 radius: 100.0,
-                lineWidth: 10.0,
+                lineWidth: 5.0,
                 percent: 0.1,
-                center: Image.asset("assets/images/users.png",height: 100, width: 200,),
-                backgroundColor: Colors.grey,
-                progressColor: Colors.blue,
+                center: Image.asset("assets/images/users.png",height: 150, width: 150,),
+                backgroundColor: Colors.white10,
+                progressColor: Colors.deepPurpleAccent,
               ),
               const SizedBox(
                 height: 50,
               ),
-              Text(
-                "Name: $user",
-                style: const TextStyle(
-                  fontSize: 20,
-                ),
+              Column(
+                children: [
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      user.toString(),
+                      style: TextStyle(fontSize: 35, fontWeight:FontWeight.w500),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      '20 @eco_points',
+                      style: TextStyle(fontSize: 18, fontWeight:FontWeight.w300),
+                    ),
+                  ),
+                  TextButton(
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
-                "Email: ${auth.currentUser!.email}",
-                style: const TextStyle(
-                  fontSize: 16,
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text(
-                "Eco Points: 20",
-                style: TextStyle(
-                  fontSize: 16,
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text(
-                "Get a 10% discount on your next purchase with 100 eco points.",
-                style: TextStyle(
-                  fontSize: 10,
-                ),
+              onPressed: () {
+                print('object');
+              },
+              child: Text('View History'),
+            ),
+                ],
               ),
         ]
       ),

@@ -123,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 padding: const EdgeInsets.all(20),
                                 child: FilledButton(
                                   onPressed: () {
-                                    RouteStateScope.of(context).go('/book');
+                                    RouteStateScope.of(context).go('/authors');
                                   },
                                   child: const Text("Issue Pass"),
                                 ),
