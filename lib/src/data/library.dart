@@ -25,6 +25,7 @@ Future<void> getData() async {
 
 Library libraryInstance = Library()
   ..addPass(passIndex: 0, issueDate: DateTime(2023, 10, 13));
+
 //     title: 'Left Hand of Darkness',
 //     authorName: 'Ursula K. Le Guin',
 //     isPopular: true,
@@ -57,7 +58,7 @@ class Library {
     Pass(2, 'Pass: Students', 25, const Icon(Icons.abc_outlined)),
     Pass(3, 'Pass: Senior Citizen', 40, const Icon(Icons.abc_outlined)),
     Pass(4, 'Tour: Aga Khan Palace', 25, const Icon(Icons.person_3)),
-    Pass(3, 'Tour: Shanivar Wada', 20, const Icon(Icons.person_3))
+    Pass(5, 'Tour: Shanivar Wada', 20, const Icon(Icons.person_3))
   ];
   // constructor
   Library();

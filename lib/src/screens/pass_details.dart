@@ -48,6 +48,11 @@ class _PassDetailsScreenState extends State<PassDetailsScreen> {
   Future<void> addPass() {
     FirebaseAuth auth = FirebaseAuth.instance;
     final uid = auth.currentUser?.uid;
+
+    // update eco points
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    users.doc(uid).update({'eco_points': FieldValue.increment(30)});
+    
     var data = {
       'index': widget.pass!.passIndex,
       'full_name': auth.currentUser?.displayName,
@@ -57,6 +62,8 @@ class _PassDetailsScreenState extends State<PassDetailsScreen> {
     };
     return passes.doc(uid).collection(widget.pass!.passIndex.toString()).doc().set(data)
     .onError((e, _) => print("Error writing document: $e"));
+
+    
   }
 
   @override
