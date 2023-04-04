@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import '../data/library.dart';
@@ -17,23 +17,55 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final String title = 'Pune Connect';  
+  final String title = 'Pune Connect';
+  bool is_issuedPassAdded = false;
+
   dynamic fAadhar;
-  
+
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  void getIssuedPasses() async {
+    if (is_issuedPassAdded) {
+      return;
+    }
+    Library.clearIssuedPass();
+
+    QuerySnapshot querySnapshot = await firestore
+        .collection("passes")
+        .doc(uid)
+        .collection(DateFormat('yyyy-MM-dd').format(DateTime.now()))
+        .get();
+
+    for (QueryDocumentSnapshot documentSnapshot in querySnapshot.docs) {
+      int index = documentSnapshot['index'] as int;
+      libraryInstance.addPass(passIndex: index, issueDate: DateTime.now());
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-
     var user = auth.currentUser!.displayName;
     final uid = auth.currentUser?.uid;
-    
+
     getData() async {
-      await firestore.collection("users").doc(uid).get().then((ds){
+      await firestore.collection("users").doc(uid).get().then((ds) {
         setState(() {
           fAadhar = ds.data()?['adhar'];
         });
-      });     
+      });
+    }
+
+    if (!is_issuedPassAdded) {
+      getIssuedPasses();
+      setState(() {
+        is_issuedPassAdded = true;
+      });
     }
     return Scaffold(
         appBar: AppBar(

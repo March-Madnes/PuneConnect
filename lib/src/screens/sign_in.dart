@@ -1,13 +1,9 @@
-import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
-import 'package:pune_connect/src/widgets/utils.dart';
 import 'package:pune_connect/src/routing/route_state.dart';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pune_connect/src/widgets/round_button.dart';
+import 'package:pune_connect/src/widgets/utils.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -49,13 +45,14 @@ class _SignupScreenState extends State<SignupScreen>
   @override
   Widget build(BuildContext context) {
     final routeState = RouteStateScope.of(context);
+    
     // redirect to home if user is already logged in
     auth.authStateChanges().listen((User? user) {
-      if (user == null) {
-      } else {
+      if (user != null) {
         routeState.go('/home');
-      }
+      } 
     });
+
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,

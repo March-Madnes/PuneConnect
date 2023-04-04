@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pune_connect/src/screens/home.dart';
 
-// import 'auth.dart';
 import 'routing.dart';
 import 'screens/navigator.dart';
 
