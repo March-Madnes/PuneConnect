@@ -6,6 +6,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 
 import '../data/library.dart';
 import '../routing.dart';
+import '../data/issuedPass.dart';
 import '../widgets/issued_pass.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -29,7 +30,6 @@ class _HomeScreenState extends State<HomeScreen> {
     if (is_issuedPassAdded) {
       return;
     }
-    Library.clearIssuedPass();
 
     QuerySnapshot querySnapshot = await firestore
         .collection("passes")
@@ -39,7 +39,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
     for (QueryDocumentSnapshot documentSnapshot in querySnapshot.docs) {
       int index = documentSnapshot['index'] as int;
-      libraryInstance.addPass(passIndex: index, issueDate: DateTime.now());
+      List<IssuedPass> passes = libraryInstance.allIssuedPasses;
+      bool found = false;
+      for (int i = 0; i < passes.length; i++) {
+        if (passes[i].passIndex == index) {
+          found = true;
+          break;
+        }
+      }
+      if (!found) {
+        libraryInstance.addPass(passIndex: index, issueDate: DateTime.now());
+      }
     }
   }
 

@@ -61,8 +61,6 @@ class Library {
   // constructor
   Library();
 
-  static List<int> issuedPass=[];
-
   void addPass({
     required int passIndex,
     required DateTime issueDate,
@@ -75,12 +73,11 @@ class Library {
         allPasses[passIndex].price,
         allPasses[passIndex].passIcon);
     allIssuedPasses.add(issuedPass);
-    print(issueDate);
   }
 
 
-  static void clearIssuedPass()
+  void clearIssuedPass()
   {
-    issuedPass.clear();
+    allIssuedPasses.clear();
   }
 }
