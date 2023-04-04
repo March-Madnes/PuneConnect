@@ -153,6 +153,7 @@ class _SignupScreenState extends State<SignupScreen>
                             'name': nameController.text,
                             'email': emailController.text,
                             'adhar': adharController.text,
+                            'eco_points':20,
                           });
                           routeState.go('/home');
                           return value;
