@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:url_launcher/link.dart';
-import 'package:razorpay_flutter/razorpay_flutter.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 import '../data.dart';
 
@@ -18,6 +17,7 @@ class PassDetailsScreen extends StatefulWidget {
 
 class _PassDetailsScreenState extends State<PassDetailsScreen> {
   late var _razorpay;
+  
 
   @override
   void initState() {
@@ -37,6 +37,9 @@ class _PassDetailsScreenState extends State<PassDetailsScreen> {
   void _handlePaymentError(PaymentFailureResponse response) {
     // Do something when payment fails
     print("Payment Fail");
+    print(response.error);
+    print(response.message);
+    print("why");
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
@@ -55,7 +58,7 @@ class _PassDetailsScreenState extends State<PassDetailsScreen> {
       'pass_type': widget.pass!.title,
       'time': DateTime.now(),
     };
-    return passes.doc(uid).collection(widget.pass!.passIndex.toString()).doc().set(data)
+    return passes.doc(uid).collection(DateFormat('yyyy-MM-dd').format(DateTime.now())).doc().set(data)
     .onError((e, _) => print("Error writing document: $e"));
   }
 
@@ -70,6 +73,14 @@ class _PassDetailsScreenState extends State<PassDetailsScreen> {
         ),
       );
     }
+
+    Map<String, String> passDetails ={
+    'passIndex' : widget.pass!.passIndex.toString(),
+    'passTitle' : widget.pass!.title,
+    'userName' : auth.currentUser!.displayName ?? "",
+    'passPrice' : widget.pass!.price.toString(),
+    };
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.pass!.title),
@@ -85,7 +96,7 @@ class _PassDetailsScreenState extends State<PassDetailsScreen> {
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             Text(
-              'Price: ₹ '+widget.pass!.price.toString(),
+              'Price: ₹${passDetails['passPrice']}',
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const Padding(padding: EdgeInsets.all(20.0),
@@ -99,14 +110,14 @@ class _PassDetailsScreenState extends State<PassDetailsScreen> {
                 var options = {
                   'key': "rzp_test_4Q6YObDL0hgfUu",
                   // amount will be multiple of 100
-                  'amount': '100', //So its pay 500
-                  'name': 'PMPML Pass',
-                  'description': 'Demo',
+                  'amount': int.parse(passDetails['passPrice']!)*100, //So its pay 500
+                  'name': passDetails['username'],
+                  'description': passDetails['passTitle'],
                   'timeout': 300, // in seconds
-                  'prefill': {
-                    'contact': '8767272564',
-                    'email': 'sahilkamate03@gmail.com'
-                  }
+                  // 'prefill': {
+                    // 'contact': '8767272564',
+                    // 'email': 'sahilkamate03@gmail.com'
+                  // }
                 };
                 _razorpay.open(options);
               },

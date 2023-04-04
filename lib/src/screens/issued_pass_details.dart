@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../data.dart';
-import '../routing.dart';
 
 class IssuedPassDetailsScreen extends StatelessWidget {
   final IssuedPass? pass;

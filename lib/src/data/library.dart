@@ -1,10 +1,9 @@
-import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 import 'issuedPass.dart';
 import 'pass.dart';
-import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 FirebaseFirestore firestore = FirebaseFirestore.instance;
 FirebaseAuth auth = FirebaseAuth.instance;
@@ -23,8 +22,8 @@ Future<void> getData() async {
   print(allData);
 }
 
-Library libraryInstance = Library()
-  ..addPass(passIndex: 0, issueDate: DateTime(2023, 10, 13));
+Library libraryInstance = Library();
+  // ..addPass(passIndex: 1, issueDate: DateTime(2023, 11, 13));
 //     title: 'Left Hand of Darkness',
 //     authorName: 'Ursula K. Le Guin',
 //     isPopular: true,
@@ -62,6 +61,8 @@ class Library {
   // constructor
   Library();
 
+  static List<int> issuedPass=[];
+
   void addPass({
     required int passIndex,
     required DateTime issueDate,
@@ -74,5 +75,12 @@ class Library {
         allPasses[passIndex].price,
         allPasses[passIndex].passIcon);
     allIssuedPasses.add(issuedPass);
+    print(issueDate);
+  }
+
+
+  static void clearIssuedPass()
+  {
+    issuedPass.clear();
   }
 }
