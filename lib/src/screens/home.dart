@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
     try {
       final ds = await firestore.collection("users").doc(uid).get();
       setState(() {
-        fAadhar = ds.data()?['adhar'];
+        fAadhar = ds.data()?['adhar'].toString();
       });
     } catch (e) {
       print("Error fetching user data: $e");
@@ -119,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       if (libraryInstance.allIssuedPasses.isNotEmpty)
                         Container(
                           height: 200,
-                          child: QrImage(
+                          child: QrImageView(
                             data: fAadhar.toString(),
                             version: QrVersions.auto,
                             size: 200.0,
